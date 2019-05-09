@@ -1,0 +1,1 @@
+/Library/Developer/CommandLineTools/usr/bin/c++  -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/K_Core.dir/main.cpp.o CMakeFiles/K_Core.dir/cores.cpp.o CMakeFiles/K_Core.dir/include.cpp.o CMakeFiles/K_Core.dir/graph.cpp.o CMakeFiles/K_Core.dir/condition.cpp.o CMakeFiles/K_Core.dir/filemanage.cpp.o  -o K_Core 
