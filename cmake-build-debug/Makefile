@@ -56,6 +56,17 @@ CMAKE_BINARY_DIR = /Users/gjy/CLionProjects/Community/cmake-build-debug
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/Applications/CLion.app/Contents/bin/cmake/mac/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+
+.PHONY : test/fast
+
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
@@ -122,6 +133,19 @@ Communtity: cmake_check_build_system
 Communtity/fast:
 	$(MAKE) -f CMakeFiles/Communtity.dir/build.make CMakeFiles/Communtity.dir/build
 .PHONY : Communtity/fast
+
+#=============================================================================
+# Target rules for targets named MyTests
+
+# Build rule for target.
+MyTests: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 MyTests
+.PHONY : MyTests
+
+# fast build rule for target.
+MyTests/fast:
+	$(MAKE) -f CMakeFiles/MyTests.dir/build.make CMakeFiles/MyTests.dir/build
+.PHONY : MyTests/fast
 
 condition.o: condition.cpp.o
 
@@ -258,6 +282,33 @@ include.cpp.s:
 	$(MAKE) -f CMakeFiles/Communtity.dir/build.make CMakeFiles/Communtity.dir/include.cpp.s
 .PHONY : include.cpp.s
 
+ks_core.o: ks_core.cpp.o
+
+.PHONY : ks_core.o
+
+# target to build an object file
+ks_core.cpp.o:
+	$(MAKE) -f CMakeFiles/Communtity.dir/build.make CMakeFiles/Communtity.dir/ks_core.cpp.o
+.PHONY : ks_core.cpp.o
+
+ks_core.i: ks_core.cpp.i
+
+.PHONY : ks_core.i
+
+# target to preprocess a source file
+ks_core.cpp.i:
+	$(MAKE) -f CMakeFiles/Communtity.dir/build.make CMakeFiles/Communtity.dir/ks_core.cpp.i
+.PHONY : ks_core.cpp.i
+
+ks_core.s: ks_core.cpp.s
+
+.PHONY : ks_core.s
+
+# target to generate assembly for a file
+ks_core.cpp.s:
+	$(MAKE) -f CMakeFiles/Communtity.dir/build.make CMakeFiles/Communtity.dir/ks_core.cpp.s
+.PHONY : ks_core.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -285,15 +336,71 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/Communtity.dir/build.make CMakeFiles/Communtity.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+test.o: test.cpp.o
+
+.PHONY : test.o
+
+# target to build an object file
+test.cpp.o:
+	$(MAKE) -f CMakeFiles/MyTests.dir/build.make CMakeFiles/MyTests.dir/test.cpp.o
+.PHONY : test.cpp.o
+
+test.i: test.cpp.i
+
+.PHONY : test.i
+
+# target to preprocess a source file
+test.cpp.i:
+	$(MAKE) -f CMakeFiles/MyTests.dir/build.make CMakeFiles/MyTests.dir/test.cpp.i
+.PHONY : test.cpp.i
+
+test.s: test.cpp.s
+
+.PHONY : test.s
+
+# target to generate assembly for a file
+test.cpp.s:
+	$(MAKE) -f CMakeFiles/MyTests.dir/build.make CMakeFiles/MyTests.dir/test.cpp.s
+.PHONY : test.cpp.s
+
+truss.o: truss.cpp.o
+
+.PHONY : truss.o
+
+# target to build an object file
+truss.cpp.o:
+	$(MAKE) -f CMakeFiles/Communtity.dir/build.make CMakeFiles/Communtity.dir/truss.cpp.o
+.PHONY : truss.cpp.o
+
+truss.i: truss.cpp.i
+
+.PHONY : truss.i
+
+# target to preprocess a source file
+truss.cpp.i:
+	$(MAKE) -f CMakeFiles/Communtity.dir/build.make CMakeFiles/Communtity.dir/truss.cpp.i
+.PHONY : truss.cpp.i
+
+truss.s: truss.cpp.s
+
+.PHONY : truss.s
+
+# target to generate assembly for a file
+truss.cpp.s:
+	$(MAKE) -f CMakeFiles/Communtity.dir/build.make CMakeFiles/Communtity.dir/truss.cpp.s
+.PHONY : truss.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... test"
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... Communtity"
+	@echo "... MyTests"
 	@echo "... condition.o"
 	@echo "... condition.i"
 	@echo "... condition.s"
@@ -309,9 +416,18 @@ help:
 	@echo "... include.o"
 	@echo "... include.i"
 	@echo "... include.s"
+	@echo "... ks_core.o"
+	@echo "... ks_core.i"
+	@echo "... ks_core.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... test.o"
+	@echo "... test.i"
+	@echo "... test.s"
+	@echo "... truss.o"
+	@echo "... truss.i"
+	@echo "... truss.s"
 .PHONY : help
 
 

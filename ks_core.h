@@ -10,7 +10,7 @@
 class KSCore {
 
 };
-void ComputerKSCore(Graph graph, int para_k, int para_s);
-
+bool ComputeKSCore(Graph graph, int para_k, int para_s);
+bool KCliqueCommunity(Graph graph, int para_k);
 
 #endif //COMMUNTITY_KS_CORE_H

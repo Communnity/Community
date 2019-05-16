@@ -5,6 +5,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Communtity.dir/graph.cpp.o"
   "CMakeFiles/Communtity.dir/condition.cpp.o"
   "CMakeFiles/Communtity.dir/file_manage.cpp.o"
+  "CMakeFiles/Communtity.dir/truss.cpp.o"
+  "CMakeFiles/Communtity.dir/ks_core.cpp.o"
   "Communtity.pdb"
   "Communtity"
 )

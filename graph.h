@@ -16,6 +16,16 @@ class Edge{
 class Vertex{
     public:
         int attribute_;
+};
+class XYEdge{
+    public:
+        int v_;
+        int u_;
+};
+class SupEdge:public XYEdge{
+    public:
+        int sup_;
+        SupEdge(int v,int u,int sup){u_ = u, v_  = v, sup_ = sup; };
 
 };
 class Graph{
@@ -24,8 +34,16 @@ class Graph{
         int m_;
         vector<vector<Edge> > edge_;
         vector<Vertex> vertex_;
+        unordered_map<long long, int> exsit_edge_;
+        unordered_map<int, int> exsit_vertex_;
+        void Init();
+        Graph(int n, int m);
         Graph();
+        bool Empty();
         void InputGraph();
+        void OutputGraph();
+        int CalEdgeNum();
+
 };
 
 class EgoGraph:public Graph{
@@ -34,8 +52,9 @@ class EgoGraph:public Graph{
 };
 
 Graph ExtractSubgraph(Graph g,vector<int> need);
-Graph InputGraph();
+void DeleteVertex(Graph &graph, int u);
 Graph InputGraphWithAddColor();
 void OutputGraph(Graph graph);
+long long EdgeId(int u, int v);
 #endif //Communtity_GRAPH_H
 

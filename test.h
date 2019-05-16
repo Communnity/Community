@@ -4,9 +4,12 @@
 
 #ifndef COMMUNTITY_TEST_H
 #define COMMUNTITY_TEST_H
-
-
+#include <gtest/gtest.h>
+#include <numeric>
+#include <vector>
 class test {
+
+
 
 };
 

@@ -3,37 +3,44 @@
 //
 
 #include "graph.h"
-Graph InputGraph(){
-    Graph graph;
-
-    read(graph.n_); read(graph.m_);
-
-    for(int i = 0; i < graph.n_; ++i){
-        scanf("%d", &graph.vertex_[i]);
-    }
-    for(int i = 0; i < graph.m_; ++i){
-        int x,y;
-        double w1,w2;
-        read(x);read(y);scanf("%f %f",&w1,&w2);
-        x--;y--;//[0,N)
-        //cout<<x<<" "<<y<<" "<<w1<<" "<<w2<<endl;
-        Edge edge_x,edge_y;
-        edge_x.point_=y;
-        edge_y.point_=x;
-        graph.edge_[x].push_back(edge_x);
-        graph.edge_[y].push_back(edge_y);
-    }
-
-    return graph;
+long long EdgeId(int u, int v){
+    if(u > v) swap(u, v);
+    return u * 1000000007LL + v;
 }
+bool Graph::Empty() {
+
+    for(int u = 0; u < this->n_; u++) if(this->exsit_vertex_[u]) return false;
+    return true;
+}
+void DeleteVertex(Graph &graph, int u){
+    graph.exsit_vertex_[u] = 0;
+    for(auto edge_u:graph.edge_[u]){
+        int v = edge_u.point_;
+
+        if(graph.exsit_vertex_[v] == 0)continue;
+        graph.exsit_edge_[EdgeId(u, v)] = 0;
+    }
+
+}
+
+void Graph:: Init(){
+    for(int i =0 ; i < this->n_; ++i){
+        Vertex vertex;vertex.attribute_ = 0;
+        vertex_.push_back(vertex);
+    }
+    for(int i = 0; i < this->m_; ++i){
+        vector<Edge> empty_edge;
+        edge_.push_back(empty_edge);
+    }
+}
+
 void Graph:: InputGraph(){
-
-
     read(this->n_); read(this->m_);
-
+    this->Init();
     for(int i = 0; i < this->n_; ++i){
         scanf("%d", &this->vertex_[i]);
     }
+
     for(int i = 0; i < this->m_; ++i){
         int x,y;
         double w1,w2;
@@ -47,7 +54,28 @@ void Graph:: InputGraph(){
         this->edge_[y].push_back(edge_y);
     }
 
+    for(int u = 0; u < this->n_; ++u){
+        this->exsit_vertex_[u] = 1;
+        for(auto edge_u:this->edge_[u]){
+            int v = edge_u.point_;
+            this->exsit_edge_[EdgeId(u, v)] = 1;
+        }
+    }
 }
+
+void Graph::OutputGraph() {
+    for(int u = 0; u < this->n_; u++) if(this->exsit_vertex_[u])
+        printf("%d ",u + 1);
+    printf("\n");
+    for(int u = 0; u < this->n_; u++){
+        for(auto edge_u:this->edge_[u]){
+            int v = edge_u.point_;
+            if(this->exsit_edge_[EdgeId(u, v)])
+                printf("%d %d\n",u + 1, v + 1);
+        }
+    }
+}
+
 Graph InputGraphWithAddColor(){
     Graph graph;
     read(graph.n_); read(graph.m_);
@@ -85,15 +113,26 @@ void OutputGraph(Graph graph, string file_str){
         }
     }
 }
-Graph::Graph(void){
-    for(int i =0 ; i < c_Max_Vertex_Num; ++i){
-        Vertex vertex;vertex.attribute_=0;
+Graph::Graph(void) {
+}
+Graph::Graph(int n, int m){
+    this->n_ = n;
+    this->m_ = m;
+    for(int i =0 ; i < this->n_; ++i){
+        Vertex vertex;vertex.attribute_ = 0;
         vertex_.push_back(vertex);
     }
-    for(int i = 0; i < c_Max_Vertex_Num; ++i){
+    for(int i = 0; i < this->m_; ++i){
         vector<Edge> empty_edge;
         edge_.push_back(empty_edge);
     }
+}
+int Graph::CalEdgeNum(){
+    int m = 0;
+    for(int i = 0; i < this->n_; i++){
+        m += this->edge_[i].size();
+    }
+    return m;
 }
 Graph ExtractSubgraph(Graph graph, vector<int> need){
     int &n = graph.n_;

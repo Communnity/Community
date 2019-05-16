@@ -4,24 +4,19 @@
 
 #include "cores.h"
 
-int  bin[c_Max_Vertex_Num];
-int pos[c_Max_Vertex_Num];
-int  vert[c_Max_Vertex_Num];
+
 CoresDelLine FindCores(Graph g){
     int n = g.n_;
     int md = 0;
+    vector<int>  bin(g.n_ + 10);
+    vector<int>  pos(g.n_ + 10);
+    vector<int>  vert(g.n_ + 10);
 
     vector<int> deg;
     for(int v = 0; v < n; v++) deg.push_back(g.edge_[v].size());
-    for(int v = 0; v < n; v++){
-        int d = 0;
-        for(int i = 0;i < g.edge_[v].size(); i++){
-            int u = g.edge_[v][i].point_ ,  w = g.edge_[v][i].weight_;
-            d++;
-            if(d > md) md = d;
-        }
-        deg[v] = d;
-    }
+    for(auto deg_v:deg)
+        md = max(md, deg_v);
+
 
     for(int d = 0; d <= md; d++) bin[d] = 0;
     for(int v = 0; v < n; v++) bin[deg[v]]++;
@@ -76,7 +71,7 @@ CoresDelLine FindCores(Graph g){
     for(int i = 0; i < cores_del_line.size(); i++){
         printf("%d ",cores_del_line[i].k_);
         for(int j = 0; j < cores_del_line[i].del_vertex_.size(); j++){
-            printf("%d ",cores_del_line[i].del_vertex_[j]);
+            printf("%d ",cores_del_line[i].del_vertex_[j] + 1);
         }
         printf("\n");
     }

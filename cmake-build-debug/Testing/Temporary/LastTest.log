@@ -1,0 +1,28 @@
+Start testing: May 15 11:04 CST
+----------------------------------------------------------
+1/1 Testing: Test
+1/1 Test: Test
+Command: "/Users/gjy/CLionProjects/Community/cmake-build-debug/MyTests"
+Directory: /Users/gjy/CLionProjects/Community/cmake-build-debug
+"Test" start time: May 15 11:04 CST
+Output:
+----------------------------------------------------------
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from MyTest
+[ RUN      ] MyTest.Sum
+[       OK ] MyTest.Sum (0 ms)
+[----------] 1 test from MyTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (1 ms total)
+[  PASSED  ] 1 test.
+<end of output>
+Test time =   0.02 sec
+----------------------------------------------------------
+Test Passed.
+"Test" end time: May 15 11:04 CST
+"Test" time elapsed: 00:00:00
+----------------------------------------------------------
+
+End testing: May 15 11:04 CST

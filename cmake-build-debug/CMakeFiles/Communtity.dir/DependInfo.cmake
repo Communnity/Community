@@ -9,12 +9,15 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/gjy/CLionProjects/Community/file_manage.cpp" "/Users/gjy/CLionProjects/Community/cmake-build-debug/CMakeFiles/Communtity.dir/file_manage.cpp.o"
   "/Users/gjy/CLionProjects/Community/graph.cpp" "/Users/gjy/CLionProjects/Community/cmake-build-debug/CMakeFiles/Communtity.dir/graph.cpp.o"
   "/Users/gjy/CLionProjects/Community/include.cpp" "/Users/gjy/CLionProjects/Community/cmake-build-debug/CMakeFiles/Communtity.dir/include.cpp.o"
+  "/Users/gjy/CLionProjects/Community/ks_core.cpp" "/Users/gjy/CLionProjects/Community/cmake-build-debug/CMakeFiles/Communtity.dir/ks_core.cpp.o"
   "/Users/gjy/CLionProjects/Community/main.cpp" "/Users/gjy/CLionProjects/Community/cmake-build-debug/CMakeFiles/Communtity.dir/main.cpp.o"
+  "/Users/gjy/CLionProjects/Community/truss.cpp" "/Users/gjy/CLionProjects/Community/cmake-build-debug/CMakeFiles/Communtity.dir/truss.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")
 
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "/usr/local/include"
   )
 
 # Targets to which this target links.

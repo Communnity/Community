@@ -22,10 +22,22 @@ CMakeFiles/Communtity.dir/graph.cpp.o: ../include.h
 CMakeFiles/Communtity.dir/include.cpp.o: ../include.cpp
 CMakeFiles/Communtity.dir/include.cpp.o: ../include.h
 
+CMakeFiles/Communtity.dir/ks_core.cpp.o: ../graph.h
+CMakeFiles/Communtity.dir/ks_core.cpp.o: ../include.h
+CMakeFiles/Communtity.dir/ks_core.cpp.o: ../ks_core.cpp
+CMakeFiles/Communtity.dir/ks_core.cpp.o: ../ks_core.h
+
 CMakeFiles/Communtity.dir/main.cpp.o: ../condition.h
 CMakeFiles/Communtity.dir/main.cpp.o: ../cores.h
 CMakeFiles/Communtity.dir/main.cpp.o: ../file_manage.h
 CMakeFiles/Communtity.dir/main.cpp.o: ../graph.h
 CMakeFiles/Communtity.dir/main.cpp.o: ../include.h
+CMakeFiles/Communtity.dir/main.cpp.o: ../ks_core.h
 CMakeFiles/Communtity.dir/main.cpp.o: ../main.cpp
+CMakeFiles/Communtity.dir/main.cpp.o: ../truss.h
+
+CMakeFiles/Communtity.dir/truss.cpp.o: ../graph.h
+CMakeFiles/Communtity.dir/truss.cpp.o: ../include.h
+CMakeFiles/Communtity.dir/truss.cpp.o: ../truss.cpp
+CMakeFiles/Communtity.dir/truss.cpp.o: ../truss.h
 
