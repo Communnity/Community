@@ -13,7 +13,7 @@ int FindMinKSDegreeVertex(Graph &graph, int para_k, int para_s){
         for(auto edge_u:graph.edge_[u]) {
             int v = edge_u.point_;
             if(!graph.exsit_vertex_[v]) continue;
-            cout << u <<" "<<v<<" "<<graph.exsit_edge_[EdgeId(u, v)]<<endl;
+           // cout << u <<" "<<v<<" "<<graph.exsit_edge_[EdgeId(u, v)]<<endl;
             if(!graph.exsit_edge_[EdgeId(u, v)]) continue;
             int sup_u_v = 0;
             for(auto edge_v:graph.edge_[v]){
@@ -53,7 +53,6 @@ bool ComputeKSCore(Graph graph, int para_k, int para_s){
             return false;
         }
         int u = FindMinKSDegreeVertex(graph, para_k, para_s);
-        cout << u + 1 << endl;
         if(u >= 0){
             DeleteVertex(graph, u);
 
@@ -81,7 +80,40 @@ bool ComputeKSCoreOfEgo(Graph graph, int u, int para_k, int para_s){
     return ComputeKSCore(graph, para_k, para_s);
 
 }
+bool FindKClique(Graph &graph,int dep,vector<int> &choose,int para_k){
+    if(dep > para_k){
 
+        for(int u = 0; u < graph.n_; u++) if(choose[u])
+            for(int  v = 0; v < graph.n_; v++) if(choose[v]){
+                if(u == v) continue;
+                if(!graph.exsit_edge_[EdgeId(u, v)]) return false;
+            }
+
+        return true;
+    }
+    for(int u = 0 ;u < graph.n_; u++) if(!choose[u]){
+        choose[u] = 1;
+        bool find_k_clique = FindKClique(graph, dep + 1 , choose, para_k);
+        choose[u] = 0;
+        if(find_k_clique) return true;
+    }
+    return false;
+}
+bool CheckKCliqueCommunity(Graph &graph, int para_k){
+    vector<int> choose(graph.n_);
+    Graph new_graph = graph.RenewGraph();
+    for(int u = 0; u < graph.n_; u++){
+        choose[u] = 1;
+        if(!FindKClique(new_graph, 2 , choose, para_k)){
+            printf("%d\n",u + 1);
+            //cout << "fuck= "<< u <<endl;
+            return false;
+        }
+
+        choose[u] = 0;
+    }
+    return true;
+}
 bool KCliqueCommunity(Graph graph, int para_k){
     bool k_clique_community = 0;
     while(!(k_clique_community)){
@@ -98,6 +130,12 @@ bool KCliqueCommunity(Graph graph, int para_k){
             }
         }
     }
-    graph.OutputGraph();
+
+    if(!CheckKCliqueCommunity(graph, para_k)) {
+        graph.OutputOriginalGraph();
+        graph.OutputGraph();
+        //while(1);
+        assert(0);
+    }
     return true;
 }

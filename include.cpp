@@ -18,3 +18,7 @@ char* StrToChar(string str){
     strcpy(file_s, str.c_str());
     return file_s;
 }
+
+int ran(int md){
+    return rand() % md + 1;
+}

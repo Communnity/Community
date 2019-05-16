@@ -31,7 +31,11 @@ hash_map
 -
 sys/uio.h
 -
+sys/time.h
+-
 sys/io.h
+-
+time.h
 -
 dirent.h
 -

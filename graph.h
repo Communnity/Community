@@ -12,6 +12,7 @@ class Edge{
     public:
         int point_;
         int weight_;
+        Edge(int point,int weight){point_ = point; weight_ = weight;};
 };
 class Vertex{
     public:
@@ -41,8 +42,13 @@ class Graph{
         Graph();
         bool Empty();
         void InputGraph();
+        void InputGraphWithAttribute();
         void OutputGraph();
+        void OutputOriginalGraph();
+        Graph RenewGraph();
         int CalEdgeNum();
+        void RandomInputGraph();
+        void ClearGraph();
 
 };
 

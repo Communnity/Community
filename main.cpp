@@ -12,10 +12,10 @@ int main() {
 
     //freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/foursquare_extend/foursquare_extend.inf","r",stdin);
     //freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/foursquare_extend/qwynb.txt","w",stdout);
-    freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/small/simple-graph.in","r",stdin);
+    freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/small/test-graph.in","r",stdin);
     Graph graph;
 
-    graph.InputGraph();
+//    graph.InputGraph();
 
 //    CoresDelLine cores_del_line = FindCores(graph);
 //    cout<<"Check Cores Del Line : "<<CheckCoresDelLine(graph, cores_del_line)<<endl;
@@ -32,6 +32,13 @@ int main() {
 //    Truss truss = FindTruss(graph);
 //    for(int i = 0; i< truss.size();i++) printf("%d %d %d\n",truss[i].v_+1,truss[i].u_+1,truss[i].sup_);
 //    printf("\n");
-    cout<<KCliqueCommunity(graph, 3)<<endl;
+//    cout<<KCliqueCommunity(graph, 4)<<endl;
+    while(1) {
+        graph.ClearGraph();
+        graph.RandomInputGraph();
+        cout<<"------------------------"<<endl;
+        cout << "Found= "<<KCliqueCommunity(graph, 4) << endl;
+        cout<<"-------------------------"<<endl;
+    }
     return 0;
 }

@@ -13,6 +13,7 @@
 #include<cstring>
 #include<string>
 #include<unordered_map>
+
 #if defined __GNUC__ || defined __APPLE__
 #include <ext/hash_map>
 #else
@@ -21,8 +22,10 @@
 
 #ifdef __APPLE__
     #include <sys/uio.h>
+    #include <sys/time.h>
 #else
     #include <sys/io.h>
+    #include <time.h>
 #endif
 #include <dirent.h>
 #include<fstream>
@@ -31,5 +34,6 @@ using namespace std;
 using namespace __gnu_cxx;
 void read(int &x);
 void read(double &x);
+int ran(int x);
 char* StrToChar(string str);
 #endif //Communtity_INCLUDE_H
