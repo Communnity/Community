@@ -2,10 +2,10 @@
 // Created by Jiyang Gong on 2019-03-26.
 //
 
-#include "cores.h"
+#include "core.h"
 
 
-CoresDelLine FindCores(Graph graph){
+CoreDelLine FindCore(Graph graph){
     int n = graph.n_;
     int md = 0;
     vector<int>  bin(graph.n_ + 10);
@@ -39,7 +39,7 @@ CoresDelLine FindCores(Graph graph){
         bin[d] = bin[d-1];
     }
     bin[0] = 0;
-    CoresDelLine cores_del_line;
+    CoreDelLine cores_del_line;
     //cout<<"n="<<n<<endl;
     for(int st = 0; st < n; st++){
         int v = vert[st];
@@ -60,7 +60,9 @@ CoresDelLine FindCores(Graph graph){
             if(deg[u]>deg[v]){
                 int du = deg[u];
                 int pu = pos[u];
-
+                if(st>=pu){
+                    cout<<st<<" "<<pu<<" "<<deg[u]<<" "<<deg[v]<<endl;
+                }
                 assert(st < pu);
                 int pw = bin[du];
                 int w = vert[pw];
@@ -74,14 +76,15 @@ CoresDelLine FindCores(Graph graph){
             }
         }
     }
-    for(int i = 0; i < cores_del_line.size(); i++){
-        if(i < cores_del_line.size() - 1) continue;
-        printf("Core'K=%d Size=%d",cores_del_line[i].k_, cores_del_line[i].del_vertex_.size());
-        for(int j = 0; j < cores_del_line[i].del_vertex_.size(); j++){
-            printf("%d %d\n",cores_del_line[i].del_vertex_[j] + 1,deg[cores_del_line[i].del_vertex_[j]]);
-        }
-        printf("\n");
-    }
+//    for(int i = 0; i < cores_del_line.size(); i++){
+//        if(i < cores_del_line.size() - 1) continue;
+//        printf("Core'K=%d Size=%d",cores_del_line[i].k_, cores_del_line[i].del_vertex_.size());
+//        for(int j = 0; j < cores_del_line[i].del_vertex_.size(); j++){
+//            printf("%d %d\n",cores_del_line[i].del_vertex_[j] + 1,deg[cores_del_line[i].del_vertex_[j]]);
+//        }
+//        printf("\n");
+//    }
+    cout << "Finish "<<__FUNCTION__<<endl;
     return cores_del_line;
 }
 bool CheckCoresDegree(int n,int cores_k, vector<int> &deg){
@@ -90,7 +93,7 @@ bool CheckCoresDegree(int n,int cores_k, vector<int> &deg){
         }
     return true;
 }
-bool CheckCoresDelLine(Graph graph, CoresDelLine cores_del_line){
+bool CheckCoresDelLine(Graph graph, CoreDelLine cores_del_line){
 
     int n = graph.n_;
     int m = graph.m_;
@@ -116,7 +119,7 @@ bool CheckCoresDelLine(Graph graph, CoresDelLine cores_del_line){
     return true;
 }
 
-Cores FindLeastColorCores(Graph graph, NeedColorList need_color_vertex_list, CoresDelLine cores_del_line){
+Cores FindLeastColorCores(Graph graph, NeedColorList need_color_vertex_list, CoreDelLine cores_del_line){
 
     int n = graph.n_;
     int m = graph.m_;

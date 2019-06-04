@@ -23,7 +23,7 @@ int ran(int md){
     return rand() % md + 1;
 }
 void ReidGraph(){
-    FILE *out_fp = fopen("/Users/gjy/Documents/社交网络与图论论文/dataset/youtube/com-youtube.ungraph-reid.txt","w");
+    FILE *out_fp = fopen("/Users/gjy/Documents/社交网络与图论论文/dataset/facebook/facebook-combined-reid.txt","w");
     int n,m;
     read(n);read(m);
     cout<<n<<" " <<m<<endl;

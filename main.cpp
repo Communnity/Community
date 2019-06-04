@@ -1,6 +1,6 @@
 
 #include "include.h"
-#include "cores.h"
+#include "core.h"
 #include "truss.h"
 #include "ks_core.h"
 #include "graph.h"
@@ -14,26 +14,27 @@ int main() {
 
     //freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/foursquare_extend/foursquare_extend.inf","r",stdin);
     //freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/foursquare_extend/qwynb.txt","w",stdout);
-    freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/youtube/com-youtube.ungraph-reid.txt", "r", stdin);
+//    freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/youtube/com-youtube.ungraph-reid.txt", "r", stdin);
+    freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/facebook/facebook-combined-reid.txt", "r", stdin);
 
     Graph graph;
 
     graph.InputGraph();
 //Get core'K
-    //CoresDelLine core_del_line = FindCores(graph);
-    //cout << "Core'K="<<core_del_line[core_del_line.size()-1].k_<<endl;
+    CoreDelLine core_del_line = FindCore(graph);
+    cout << "Core'K="<<core_del_line[core_del_line.size()-1].k_<<endl;
 //Get truss'K
     Truss truss = FindTruss(graph);
     int max_truss = 0;
     for (int i = 0; i < graph.m_; i++) max_truss = max(max_truss, truss[i].sup_);
-    cout << max_truss << endl;
+    cout << "Truss'K="<<max_truss << endl;
 //Get the number of triangle
     Truss sup_edge = ComputerSup(graph);
     int sum_truss = 0;
     for(int i = 0; i < graph.m_; i++) sum_truss += sup_edge[i].sup_;
-    cout<< sum_truss/3 <<endl;
+    cout<<"the number of triangles="<< sum_truss/3 <<endl;
 
-//    CoresDelLine cores_del_line = FindCores(graph);
+//    CoreDelLine cores_del_line = FindCore(graph);
 //    cout<<"Check Cores Del Line : "<<CheckCoresDelLine(graph, cores_del_line)<<endl;
 
 //    string file_str = "/Users/gjy/Documents/社交网络与图论论文/dataset/small/query.in";

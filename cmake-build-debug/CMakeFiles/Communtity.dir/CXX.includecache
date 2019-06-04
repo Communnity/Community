@@ -10,13 +10,23 @@
 include.h
 /Users/gjy/CLionProjects/Community/include.h
 
-/Users/gjy/CLionProjects/Community/cores.h
+/Users/gjy/CLionProjects/Community/core.cpp
+core.h
+/Users/gjy/CLionProjects/Community/core.h
+
+/Users/gjy/CLionProjects/Community/core.h
 include.h
 /Users/gjy/CLionProjects/Community/include.h
 graph.h
 /Users/gjy/CLionProjects/Community/graph.h
 condition.h
 /Users/gjy/CLionProjects/Community/condition.h
+
+/Users/gjy/CLionProjects/Community/ego_community.cpp
+ego_community.h
+/Users/gjy/CLionProjects/Community/ego_community.h
+
+/Users/gjy/CLionProjects/Community/ego_community.h
 
 /Users/gjy/CLionProjects/Community/file_manage.h
 include.h
@@ -69,8 +79,8 @@ graph.h
 /Users/gjy/CLionProjects/Community/main.cpp
 include.h
 /Users/gjy/CLionProjects/Community/include.h
-cores.h
-/Users/gjy/CLionProjects/Community/cores.h
+core.h
+/Users/gjy/CLionProjects/Community/core.h
 truss.h
 /Users/gjy/CLionProjects/Community/truss.h
 ks_core.h

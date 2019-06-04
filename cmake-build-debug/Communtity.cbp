@@ -142,10 +142,16 @@
 		<Unit filename="/Users/gjy/CLionProjects/Community/condition.h">
 			<Option target="Communtity"/>
 		</Unit>
-		<Unit filename="/Users/gjy/CLionProjects/Community/cores.cpp">
+		<Unit filename="/Users/gjy/CLionProjects/Community/core.cpp">
 			<Option target="Communtity"/>
 		</Unit>
-		<Unit filename="/Users/gjy/CLionProjects/Community/cores.h">
+		<Unit filename="/Users/gjy/CLionProjects/Community/core.h">
+			<Option target="Communtity"/>
+		</Unit>
+		<Unit filename="/Users/gjy/CLionProjects/Community/ego_community.cpp">
+			<Option target="Communtity"/>
+		</Unit>
+		<Unit filename="/Users/gjy/CLionProjects/Community/ego_community.h">
 			<Option target="Communtity"/>
 		</Unit>
 		<Unit filename="/Users/gjy/CLionProjects/Community/file_manage.cpp">

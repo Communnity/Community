@@ -5,11 +5,14 @@ CMakeFiles/Communtity.dir/condition.cpp.o: ../condition.cpp
 CMakeFiles/Communtity.dir/condition.cpp.o: ../condition.h
 CMakeFiles/Communtity.dir/condition.cpp.o: ../include.h
 
-CMakeFiles/Communtity.dir/cores.cpp.o: ../condition.h
-CMakeFiles/Communtity.dir/cores.cpp.o: ../cores.cpp
-CMakeFiles/Communtity.dir/cores.cpp.o: ../cores.h
-CMakeFiles/Communtity.dir/cores.cpp.o: ../graph.h
-CMakeFiles/Communtity.dir/cores.cpp.o: ../include.h
+CMakeFiles/Communtity.dir/core.cpp.o: ../condition.h
+CMakeFiles/Communtity.dir/core.cpp.o: ../core.cpp
+CMakeFiles/Communtity.dir/core.cpp.o: ../core.h
+CMakeFiles/Communtity.dir/core.cpp.o: ../graph.h
+CMakeFiles/Communtity.dir/core.cpp.o: ../include.h
+
+CMakeFiles/Communtity.dir/ego_community.cpp.o: ../ego_community.cpp
+CMakeFiles/Communtity.dir/ego_community.cpp.o: ../ego_community.h
 
 CMakeFiles/Communtity.dir/file_manage.cpp.o: ../file_manage.cpp
 CMakeFiles/Communtity.dir/file_manage.cpp.o: ../file_manage.h
@@ -28,7 +31,7 @@ CMakeFiles/Communtity.dir/ks_core.cpp.o: ../ks_core.cpp
 CMakeFiles/Communtity.dir/ks_core.cpp.o: ../ks_core.h
 
 CMakeFiles/Communtity.dir/main.cpp.o: ../condition.h
-CMakeFiles/Communtity.dir/main.cpp.o: ../cores.h
+CMakeFiles/Communtity.dir/main.cpp.o: ../core.h
 CMakeFiles/Communtity.dir/main.cpp.o: ../file_manage.h
 CMakeFiles/Communtity.dir/main.cpp.o: ../graph.h
 CMakeFiles/Communtity.dir/main.cpp.o: ../include.h

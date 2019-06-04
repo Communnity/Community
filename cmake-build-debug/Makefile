@@ -174,32 +174,59 @@ condition.cpp.s:
 	$(MAKE) -f CMakeFiles/Communtity.dir/build.make CMakeFiles/Communtity.dir/condition.cpp.s
 .PHONY : condition.cpp.s
 
-cores.o: cores.cpp.o
+core.o: core.cpp.o
 
-.PHONY : cores.o
+.PHONY : core.o
 
 # target to build an object file
-cores.cpp.o:
-	$(MAKE) -f CMakeFiles/Communtity.dir/build.make CMakeFiles/Communtity.dir/cores.cpp.o
-.PHONY : cores.cpp.o
+core.cpp.o:
+	$(MAKE) -f CMakeFiles/Communtity.dir/build.make CMakeFiles/Communtity.dir/core.cpp.o
+.PHONY : core.cpp.o
 
-cores.i: cores.cpp.i
+core.i: core.cpp.i
 
-.PHONY : cores.i
+.PHONY : core.i
 
 # target to preprocess a source file
-cores.cpp.i:
-	$(MAKE) -f CMakeFiles/Communtity.dir/build.make CMakeFiles/Communtity.dir/cores.cpp.i
-.PHONY : cores.cpp.i
+core.cpp.i:
+	$(MAKE) -f CMakeFiles/Communtity.dir/build.make CMakeFiles/Communtity.dir/core.cpp.i
+.PHONY : core.cpp.i
 
-cores.s: cores.cpp.s
+core.s: core.cpp.s
 
-.PHONY : cores.s
+.PHONY : core.s
 
 # target to generate assembly for a file
-cores.cpp.s:
-	$(MAKE) -f CMakeFiles/Communtity.dir/build.make CMakeFiles/Communtity.dir/cores.cpp.s
-.PHONY : cores.cpp.s
+core.cpp.s:
+	$(MAKE) -f CMakeFiles/Communtity.dir/build.make CMakeFiles/Communtity.dir/core.cpp.s
+.PHONY : core.cpp.s
+
+ego_community.o: ego_community.cpp.o
+
+.PHONY : ego_community.o
+
+# target to build an object file
+ego_community.cpp.o:
+	$(MAKE) -f CMakeFiles/Communtity.dir/build.make CMakeFiles/Communtity.dir/ego_community.cpp.o
+.PHONY : ego_community.cpp.o
+
+ego_community.i: ego_community.cpp.i
+
+.PHONY : ego_community.i
+
+# target to preprocess a source file
+ego_community.cpp.i:
+	$(MAKE) -f CMakeFiles/Communtity.dir/build.make CMakeFiles/Communtity.dir/ego_community.cpp.i
+.PHONY : ego_community.cpp.i
+
+ego_community.s: ego_community.cpp.s
+
+.PHONY : ego_community.s
+
+# target to generate assembly for a file
+ego_community.cpp.s:
+	$(MAKE) -f CMakeFiles/Communtity.dir/build.make CMakeFiles/Communtity.dir/ego_community.cpp.s
+.PHONY : ego_community.cpp.s
 
 file_manage.o: file_manage.cpp.o
 
@@ -404,9 +431,12 @@ help:
 	@echo "... condition.o"
 	@echo "... condition.i"
 	@echo "... condition.s"
-	@echo "... cores.o"
-	@echo "... cores.i"
-	@echo "... cores.s"
+	@echo "... core.o"
+	@echo "... core.i"
+	@echo "... core.s"
+	@echo "... ego_community.o"
+	@echo "... ego_community.i"
+	@echo "... ego_community.s"
 	@echo "... file_manage.o"
 	@echo "... file_manage.i"
 	@echo "... file_manage.s"

@@ -70,18 +70,18 @@ CMakeFiles/Communtity.dir/main.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Communtity.dir/main.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/gjy/CLionProjects/Community/main.cpp -o CMakeFiles/Communtity.dir/main.cpp.s
 
-CMakeFiles/Communtity.dir/cores.cpp.o: CMakeFiles/Communtity.dir/flags.make
-CMakeFiles/Communtity.dir/cores.cpp.o: ../cores.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/gjy/CLionProjects/Community/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Communtity.dir/cores.cpp.o"
-	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Communtity.dir/cores.cpp.o -c /Users/gjy/CLionProjects/Community/cores.cpp
+CMakeFiles/Communtity.dir/core.cpp.o: CMakeFiles/Communtity.dir/flags.make
+CMakeFiles/Communtity.dir/core.cpp.o: ../core.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/gjy/CLionProjects/Community/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/Communtity.dir/core.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Communtity.dir/core.cpp.o -c /Users/gjy/CLionProjects/Community/core.cpp
 
-CMakeFiles/Communtity.dir/cores.cpp.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Communtity.dir/cores.cpp.i"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/gjy/CLionProjects/Community/cores.cpp > CMakeFiles/Communtity.dir/cores.cpp.i
+CMakeFiles/Communtity.dir/core.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Communtity.dir/core.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/gjy/CLionProjects/Community/core.cpp > CMakeFiles/Communtity.dir/core.cpp.i
 
-CMakeFiles/Communtity.dir/cores.cpp.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Communtity.dir/cores.cpp.s"
-	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/gjy/CLionProjects/Community/cores.cpp -o CMakeFiles/Communtity.dir/cores.cpp.s
+CMakeFiles/Communtity.dir/core.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Communtity.dir/core.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/gjy/CLionProjects/Community/core.cpp -o CMakeFiles/Communtity.dir/core.cpp.s
 
 CMakeFiles/Communtity.dir/include.cpp.o: CMakeFiles/Communtity.dir/flags.make
 CMakeFiles/Communtity.dir/include.cpp.o: ../include.cpp
@@ -161,31 +161,46 @@ CMakeFiles/Communtity.dir/ks_core.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Communtity.dir/ks_core.cpp.s"
 	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/gjy/CLionProjects/Community/ks_core.cpp -o CMakeFiles/Communtity.dir/ks_core.cpp.s
 
+CMakeFiles/Communtity.dir/ego_community.cpp.o: CMakeFiles/Communtity.dir/flags.make
+CMakeFiles/Communtity.dir/ego_community.cpp.o: ../ego_community.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/gjy/CLionProjects/Community/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Building CXX object CMakeFiles/Communtity.dir/ego_community.cpp.o"
+	/Library/Developer/CommandLineTools/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/Communtity.dir/ego_community.cpp.o -c /Users/gjy/CLionProjects/Community/ego_community.cpp
+
+CMakeFiles/Communtity.dir/ego_community.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/Communtity.dir/ego_community.cpp.i"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /Users/gjy/CLionProjects/Community/ego_community.cpp > CMakeFiles/Communtity.dir/ego_community.cpp.i
+
+CMakeFiles/Communtity.dir/ego_community.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/Communtity.dir/ego_community.cpp.s"
+	/Library/Developer/CommandLineTools/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /Users/gjy/CLionProjects/Community/ego_community.cpp -o CMakeFiles/Communtity.dir/ego_community.cpp.s
+
 # Object files for target Communtity
 Communtity_OBJECTS = \
 "CMakeFiles/Communtity.dir/main.cpp.o" \
-"CMakeFiles/Communtity.dir/cores.cpp.o" \
+"CMakeFiles/Communtity.dir/core.cpp.o" \
 "CMakeFiles/Communtity.dir/include.cpp.o" \
 "CMakeFiles/Communtity.dir/graph.cpp.o" \
 "CMakeFiles/Communtity.dir/condition.cpp.o" \
 "CMakeFiles/Communtity.dir/file_manage.cpp.o" \
 "CMakeFiles/Communtity.dir/truss.cpp.o" \
-"CMakeFiles/Communtity.dir/ks_core.cpp.o"
+"CMakeFiles/Communtity.dir/ks_core.cpp.o" \
+"CMakeFiles/Communtity.dir/ego_community.cpp.o"
 
 # External object files for target Communtity
 Communtity_EXTERNAL_OBJECTS =
 
 Communtity: CMakeFiles/Communtity.dir/main.cpp.o
-Communtity: CMakeFiles/Communtity.dir/cores.cpp.o
+Communtity: CMakeFiles/Communtity.dir/core.cpp.o
 Communtity: CMakeFiles/Communtity.dir/include.cpp.o
 Communtity: CMakeFiles/Communtity.dir/graph.cpp.o
 Communtity: CMakeFiles/Communtity.dir/condition.cpp.o
 Communtity: CMakeFiles/Communtity.dir/file_manage.cpp.o
 Communtity: CMakeFiles/Communtity.dir/truss.cpp.o
 Communtity: CMakeFiles/Communtity.dir/ks_core.cpp.o
+Communtity: CMakeFiles/Communtity.dir/ego_community.cpp.o
 Communtity: CMakeFiles/Communtity.dir/build.make
 Communtity: CMakeFiles/Communtity.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/gjy/CLionProjects/Community/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable Communtity"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/gjy/CLionProjects/Community/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_10) "Linking CXX executable Communtity"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/Communtity.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
