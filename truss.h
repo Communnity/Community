@@ -7,8 +7,8 @@
 #include "include.h"
 #include "graph.h"
 typedef vector<SupEdge> Truss;
-Truss FindTruss(Graph g);
-
+Truss FindTruss(Graph graph);
+Truss ComputerSup(Graph graph);
 
 
 

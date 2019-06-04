@@ -8,6 +8,7 @@
 #include "include.h"
 const int c_Max_Vertex_Num =  5000010;
 const int c_Max_Edge_Num = 50010010;
+typedef  vector<int> Neighbor;
 class Edge{
     public:
         int point_;
@@ -27,6 +28,7 @@ class SupEdge:public XYEdge{
     public:
         int sup_;
         SupEdge(int v,int u,int sup){u_ = u, v_  = v, sup_ = sup; };
+        SupEdge(){};
 
 };
 class Graph{
@@ -35,8 +37,8 @@ class Graph{
         int m_;
         vector<vector<Edge> > edge_;
         vector<Vertex> vertex_;
-        unordered_map<long long, int> exsit_edge_;
-        unordered_map<int, int> exsit_vertex_;
+        unordered_map<long long, int> exist_edge_;
+        unordered_map<int, int> exist_vertex_;
         void Init();
         Graph(int n, int m);
         Graph();
@@ -49,6 +51,8 @@ class Graph{
         int CalEdgeNum();
         void RandomInputGraph();
         void ClearGraph();
+        Neighbor NeighborOneVertex(int u);
+        Neighbor NeighborTwoVertex(int u, int v);
 
 };
 
@@ -58,6 +62,7 @@ class EgoGraph:public Graph{
 };
 
 Graph ExtractSubgraph(Graph g,vector<int> need);
+
 void DeleteVertex(Graph &graph, int u);
 Graph InputGraphWithAddColor();
 void OutputGraph(Graph graph);

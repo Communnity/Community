@@ -5,47 +5,42 @@
 #include "truss.h"
 
 
-vector<SupEdge> ComputerSup(Graph g){
+Truss ComputerSup(Graph graph){
     vector<int> deg;
-    for(int v = 0; v < g.n_; v++){
-        deg.push_back(g.edge_[v].size());
+    for(int v = 0; v < graph.n_; v++){
+        deg.push_back(graph.edge_[v].size());
     }
     vector<SupEdge> vec_sup_edge;
-    unordered_map<int, int> exist_edge;
 
-    for(int v = 0; v < g.n_; v++){
-        for(auto edge_v:g.edge_[v]) {
+
+    for(int v = 0; v < graph.n_; v++){
+        for(auto edge_v:graph.edge_[v]) {
             int u = edge_v.point_;
             if(v > u) continue;// (v,u) and (u,v) only count once
             SupEdge sup_edge(v, u, 0);
             //cout << sup_edge.v_<< " " << sup_edge.u_<<endl;
             vec_sup_edge.push_back(sup_edge);
-            exist_edge[v * 1LL* g.n_ + u] = 1;
         }
     }
 
 
     for(auto &sup_edge:vec_sup_edge){
-
        int triangle_v = sup_edge.v_, triangle_u = sup_edge.u_;
-       if(deg[triangle_v] > deg[triangle_u]) swap(triangle_v,triangle_u);
-       for(auto edge_triangle_u:g.edge_[triangle_u]){
+       if(deg[triangle_u] > deg[triangle_v]) swap(triangle_v,triangle_u);
+       for(auto edge_triangle_u:graph.edge_[triangle_u]){
             int triangle_w = edge_triangle_u.point_;
-            int id_vw;
-            if(triangle_v < triangle_w)id_vw = triangle_v * g.n_ + triangle_w;
-            else id_vw = triangle_w * g.n_ + triangle_v;
-            if(exist_edge.find(id_vw) != exist_edge.end()) {
+            if(graph.exist_edge_.find(EdgeId(triangle_v, triangle_w)) != graph.exist_edge_.end()) {
                 sup_edge.sup_+=1;
             }
        }
     }
     //for(auto sup_edge:vec_sup_edge)cout<<sup_edge.v_<<" "<<sup_edge.u_<<" "<<sup_edge.sup_<<endl;
     return vec_sup_edge;
-
 }
 void ReorderSupEdge(int e1 , vector<SupEdge> &vec_sup_edge, vector<int> &pos, vector<int> &bin, vector<int> &edge){
 
     int sup_e1 = vec_sup_edge[e1].sup_;
+    assert(sup_e1 > 0);
     int pe1 = pos[e1];
     int pe2 = bin[sup_e1];
     int e2 = edge[pe2];
@@ -58,16 +53,21 @@ void ReorderSupEdge(int e1 , vector<SupEdge> &vec_sup_edge, vector<int> &pos, ve
     bin[sup_e1]++;vec_sup_edge[e1].sup_--;
 
 }
-Truss FindTruss(Graph g){
-    Truss truss;
-    int max_sup = 0;
-    int n = g.n_;
-    int m = g.CalEdgeNum();
-    vector<SupEdge> vec_sup_edge = ComputerSup(g);
-    vector<int>  bin(m + 10);  // bin[x] = (sup_edge = x)'start
-    vector<int>  pos(m + 10);  // sup_edge'pos in edge array
-    vector<int>  edge(m + 10); // edge order by sup
+Truss FindTruss(Graph graph){
 
+    int max_sup = 0;
+    int n = graph.n_;
+    int m = graph.CalEdgeNum();
+    vector<SupEdge> vec_sup_edge = ComputerSup(graph);
+    vector<int>  bin(vec_sup_edge.size() + 10);  // bin[x] = (sup_edge = x)'start
+    vector<int>  pos(vec_sup_edge.size() + 10);  // sup_edge'pos in edge array
+    vector<int>  edge(vec_sup_edge.size() + 10); // edge order by sup
+    Truss truss;
+    SupEdge empty_sup_edge;
+    for(int i = 0; i < vec_sup_edge.size(); i++) truss.push_back(empty_sup_edge);
+
+    vector<int>  deg;
+    for(int v = 0; v < n; v++) deg.push_back(graph.edge_[v].size());
     assert(m == vec_sup_edge.size()*2);
 
     for(auto sup_edge:vec_sup_edge) {
@@ -82,7 +82,6 @@ Truss FindTruss(Graph g){
         bin[d] = start;
         start += num;
     }
-    cout << max_sup<<" "<<vec_sup_edge.size()<<endl;
     for(int i = 0; i < vec_sup_edge.size(); i++){
         pos[i] = bin[vec_sup_edge[i].sup_];
         edge[pos[i]] = i;
@@ -92,34 +91,46 @@ Truss FindTruss(Graph g){
     for(int i = max_sup; i>=1; i--){
         bin[i] = bin[i-1];
     }
-    bin[0] = 1;
+    bin[0] = 0;
 
     unordered_map<long long, int> exist_edge;
 
     for(int i = 0;i < vec_sup_edge.size(); i++){
         int u = vec_sup_edge[i].u_, v = vec_sup_edge[i].v_;
         assert(v < u);
-        exist_edge[v * 1LL* g.n_ + u] = i;
+        exist_edge[EdgeId(v, u)] = i;
     }
 
     for(int st = 0; st < vec_sup_edge.size(); st++){
+
         int v = vec_sup_edge[edge[st]].v_;
         int u = vec_sup_edge[edge[st]].u_;
-        assert(v < u);
-        truss.push_back(vec_sup_edge[edge[st]]);
-        int id_vu = exist_edge[v * g.n_ +u];
-        for(auto edge_v:g.edge_[v]){
-            int w = edge_v.point_ ;
-            if(w == u) continue;
-            if(exist_edge.find(u *g.n_+w) == exist_edge.end()) continue;// exist v,u,w triangle
-            int id_vw;
-            if(v < w) id_vw = exist_edge[v * 1LL* g.n_ +w]; else id_vw = exist_edge[w * 1LL* g.n_ +v];
-            if(vec_sup_edge[id_vw].sup_>vec_sup_edge[id_vu].sup_) ReorderSupEdge(id_vw, vec_sup_edge,pos,bin,edge);
-            int id_uw;
-            if(u < w) id_uw = exist_edge[u * 1LL* g.n_ +w]; else id_uw = exist_edge[w * 1LL* g.n_ +u];
-            if(vec_sup_edge[id_uw].sup_>vec_sup_edge[id_vu].sup_) ReorderSupEdge(id_uw, vec_sup_edge,pos,bin,edge);
-        }
-    }
 
+        assert(v < u);
+        truss[edge[st]] = vec_sup_edge[edge[st]];
+        if(deg[v] > deg[u]) swap(v,u);
+        assert(exist_edge.find(EdgeId(v,u)) != exist_edge.end());
+        assert(deg[v] > 0);
+        assert(deg[u] > 0);
+        for(auto edge_v:graph.edge_[v]){
+            int w = edge_v.point_;
+            if(w == u) continue;
+            if(exist_edge.find(EdgeId(v,w)) == exist_edge.end()) continue;
+            if(exist_edge.find(EdgeId(u,w)) == exist_edge.end()) continue;// exist v,u,w triangle
+            if(vec_sup_edge[exist_edge[EdgeId(v,w)]].sup_>vec_sup_edge[exist_edge[EdgeId(v,u)]].sup_){
+                //cout<<EdgeId(v,w)<<" "<<vec_sup_edge[exist_edge[EdgeId(v,w)]].sup_<<endl;
+                assert(st <pos[exist_edge[EdgeId(v,w)]]), ReorderSupEdge(exist_edge[EdgeId(v,w)], vec_sup_edge,pos,bin,edge);
+                //cout<<EdgeId(v,w)<<" "<<vec_sup_edge[exist_edge[EdgeId(v,w)]].sup_<<endl;
+            }
+            if(vec_sup_edge[exist_edge[EdgeId(u,w)]].sup_>vec_sup_edge[exist_edge[EdgeId(v,u)]].sup_){
+                assert(st < pos[exist_edge[EdgeId(u,w)]]),ReorderSupEdge(exist_edge[EdgeId(u,w)], vec_sup_edge,pos,bin,edge);
+            }
+        }
+
+        exist_edge.erase(EdgeId(v,u)); //（v,u) should be delete in graph to count triangle rightly.
+        deg[v]--;
+        deg[u]--;
+    }
+    cout << "Finish "<<__FUNCTION__<<endl;
     return truss;
 }

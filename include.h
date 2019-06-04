@@ -13,7 +13,7 @@
 #include<cstring>
 #include<string>
 #include<unordered_map>
-
+#include<map>
 #if defined __GNUC__ || defined __APPLE__
 #include <ext/hash_map>
 #else
@@ -36,4 +36,6 @@ void read(int &x);
 void read(double &x);
 int ran(int x);
 char* StrToChar(string str);
+void ReidGraph();
+
 #endif //Communtity_INCLUDE_H

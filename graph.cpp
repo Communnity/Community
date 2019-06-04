@@ -9,16 +9,45 @@ long long EdgeId(int u, int v){
 }
 bool Graph::Empty() {
 
-    for(int u = 0; u < this->n_; u++) if(this->exsit_vertex_[u]) return false;
+    for(int u = 0; u < this->n_; u++) if(this->exist_vertex_[u]) return false;
     return true;
 }
+Neighbor Graph::NeighborOneVertex(int u){
+    Neighbor neighbor_u;
+    for(auto edge_u:this->edge_[u]){
+        int v = edge_u.point_;
+        if(!this->exist_vertex_[v])continue;
+        assert(this->exist_edge_[EdgeId(u, v)] == 1);
+        neighbor_u.push_back(v);
+    }
+    sort(neighbor_u.begin(), neighbor_u.end());
+    return neighbor_u;
+}
+Neighbor Graph::NeighborTwoVertex(int u, int v){
+    Neighbor neighbor_u, neighbor_v,neighbor_u_v;
+    neighbor_u = this->NeighborOneVertex(u);
+    neighbor_v = this->NeighborOneVertex(v);
+
+    int u_i = 0, v_i = 0;
+    while(u_i < neighbor_u.size() && v_i < neighbor_v.size()){
+        if(neighbor_u[u_i] < neighbor_v[v_i]) u_i++;
+        else if(neighbor_u[u_i]>neighbor_v[v_i]) v_i++;
+        else if(neighbor_u[u_i] == neighbor_v[v_i]){
+            neighbor_u_v.push_back(neighbor_u[u_i]);
+            u_i++;
+            v_i++;
+        }
+        else assert(0);
+    }
+    return neighbor_u_v;
+}
 void DeleteVertex(Graph &graph, int u){
-    graph.exsit_vertex_[u] = 0;
+    graph.exist_vertex_[u] = 0;
     for(auto edge_u:graph.edge_[u]){
         int v = edge_u.point_;
 
-        if(graph.exsit_vertex_[v] == 0)continue;
-        graph.exsit_edge_[EdgeId(u, v)] = 0;
+        if(graph.exist_vertex_[v] == 0)continue;
+        graph.exist_edge_[EdgeId(u, v)] = 0;
     }
 
 }
@@ -34,12 +63,12 @@ void Graph:: Init(){
     }
 }
 void Graph:: RandomInputGraph(){
-    srand(1);
-    this->n_ = ran(16);
-    this->m_ = ran(this->n_ * (this->n_ - 1) / 2);
+    srand(time(NULL));
+    this->n_ = 15 ;
+    this->m_ = ran(this->n_ * (this->n_ - 1) / 3);
     this->Init();
     for(int u = 0; u < this->n_; ++u){
-        this->exsit_vertex_[u] = 1;
+        this->exist_vertex_[u] = 1;
     }
 
     for(int i = 0; i < this->m_; i++){
@@ -49,8 +78,8 @@ void Graph:: RandomInputGraph(){
             v = ran(this->n_);
             u--;
             v--;
-        }while(u == v || this->exsit_edge_[EdgeId(u, v)]);
-        this->exsit_edge_[EdgeId(u,v)] = 1;
+        }while(u == v || this->exist_edge_[EdgeId(u, v)]);
+        this->exist_edge_[EdgeId(u,v)] = 1;
         this->edge_[u].push_back(Edge(v,0));
         this->edge_[v].push_back(Edge(u,0));
     }
@@ -59,20 +88,23 @@ void Graph:: InputGraph(){
     read(this->n_); read(this->m_);
     this->Init();
     for(int u = 0; u < this->n_; ++u){
-        this->exsit_vertex_[u] = 1;
+        this->exist_vertex_[u] = 1;
     }
 
     for(int i = 0; i < this->m_; ++i){
         int x,y;
-        double w1,w2;
-        read(x);read(y);//scanf("%f %f",&w1,&w2);
+        read(x);read(y);
+
+        assert(x > 0 && x <= this->n_);
+        assert(y > 0 && y <= this->n_);
         x--;y--;//[0,N)
         //cout<<x<<" "<<y<<" "<<w1<<" "<<w2<<endl;
-
+        assert(x != y);
+        assert(this->exist_edge_[EdgeId(x, y)] == 0);
         this->edge_[x].push_back(Edge(y,0));
         this->edge_[y].push_back(Edge(x,0));
-        assert(this->exsit_edge_[EdgeId(x, y)] == 0);
-        this->exsit_edge_[EdgeId(x, y)] = 1;
+
+        this->exist_edge_[EdgeId(x, y)] = 1;
     }
 
 
@@ -81,9 +113,7 @@ void Graph:: InputGraph(){
 void Graph:: InputGraphWithAttribute(){
     read(this->n_); read(this->m_);
     this->Init();
-    for(int i = 0; i < this->n_; ++i){
-        scanf("%d", &this->vertex_[i].attribute_);
-    }
+
 
     for(int i = 0; i < this->m_; ++i){
         int x,y;
@@ -96,24 +126,27 @@ void Graph:: InputGraphWithAttribute(){
     }
 
     for(int u = 0; u < this->n_; ++u){
-        this->exsit_vertex_[u] = 1;
+        this->exist_vertex_[u] = 1;
         for(auto edge_u:this->edge_[u]){
             int v = edge_u.point_;
-            this->exsit_edge_[EdgeId(u, v)] = 1;
+            this->exist_edge_[EdgeId(u, v)] = 1;
         }
+    }
+    for(int i = 0; i < this->n_; ++i){
+        scanf("%d", &this->vertex_[i].attribute_);
     }
     cout << "Finish "<<__FUNCTION__<<endl;
 }
 void Graph::OutputGraph() {
-    for(int u = 0; u < this->n_; u++) if(this->exsit_vertex_[u])
+    for(int u = 0; u < this->n_; u++) if(this->exist_vertex_[u])
         printf("%d ",u + 1);
     printf("\n");
-    for(int u = 0; u < this->n_; u++){
+    for(int u = 0; u < this->n_; u++)if(this->exist_vertex_[u]){
         for(auto edge_u:this->edge_[u]){
             int v = edge_u.point_;
             if(u > v) continue;
-            if(this->exsit_edge_[EdgeId(u, v)]) {
-                assert(this->exsit_vertex_[v] == 1);
+            if(this->exist_edge_[EdgeId(u, v)]) {
+                assert(this->exist_vertex_[v] == 1);
                 printf("%d %d\n", u + 1, v + 1);
             }
         }
@@ -123,22 +156,25 @@ Graph Graph::RenewGraph(){
     vector<int> id(this->n_);
     int vertex_id = 0;
     Graph new_graph;
-    new_graph.Init();
-    for(int u = 0; u < this->n_; u++) if(this->exsit_vertex_[u]){
+
+    for(int u = 0; u < this->n_; u++) if(this->exist_vertex_[u]){
         id[u] = vertex_id++;
     } else
         id[u] = -1;
     new_graph.n_ = vertex_id;
     new_graph.m_ = 0;
-    for(int u = 0; u < this->n_; u++) if(this->exsit_vertex_[u]){
+    new_graph.Init();
+    for(int u = 0; u < new_graph.n_; u++)
+        new_graph.exist_vertex_[u] = 1;
+    for(int u = 0; u < this->n_; u++) if(this->exist_vertex_[u]){
         for(auto edge_u:this->edge_[u]){
             int v = edge_u.point_;
-            if(!this->exsit_vertex_[v]) continue;
-            if(!this->exsit_edge_[EdgeId(u, v)]) continue;
-            if(new_graph.exsit_edge_[EdgeId(id[u], id[v])]) continue;
+            if(!this->exist_vertex_[v]) continue;
+            if(!this->exist_edge_[EdgeId(u, v)]) continue;
+            if(new_graph.exist_edge_[EdgeId(id[u], id[v])]) continue;
             new_graph.edge_[id[u]].push_back(Edge(id[v],0));
             new_graph.edge_[id[v]].push_back(Edge(id[u],0));
-            new_graph.exsit_edge_[EdgeId(id[u], id[v])] = 1;
+            new_graph.exist_edge_[EdgeId(id[u], id[v])] = 1;
             new_graph.m_++;
         }
     }
@@ -160,29 +196,10 @@ void Graph::ClearGraph() {
     this->n_ = this->m_ = 0;
     this->vertex_.clear();
     this->edge_.clear();
-    this->exsit_vertex_.clear();
-    this->exsit_edge_.clear();
+    this->exist_vertex_.clear();
+    this->exist_edge_.clear();
 }
-Graph InputGraphWithAddColor(){
-    Graph graph;
-    read(graph.n_); read(graph.m_);
 
-    for(int i = 0; i < graph.n_; ++i){
-        graph.vertex_[i].attribute_ = rand()%100 + 1;//[1,100]
-    }
-    for(int i = 0; i < graph.m_; ++i){
-        int x,y;
-        double w1,w2;
-        read(x);read(y);scanf("%f %f",&w1,&w2);
-        x--;y--;//[0,N)
-        //cout<<x<<" "<<y<<" "<<w1<<" "<<w2<<endl;
-
-        graph.edge_[x].push_back(Edge(y,0));
-        graph.edge_[y].push_back(Edge(x,0));
-    }
-
-    return graph;
-}
 void OutputGraph(Graph graph, string file_str){
     char *file_s= StrToChar(file_str);
     FILE *fp = fopen(file_s, "w");

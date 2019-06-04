@@ -5,19 +5,22 @@
 #include "cores.h"
 
 
-CoresDelLine FindCores(Graph g){
-    int n = g.n_;
+CoresDelLine FindCores(Graph graph){
+    int n = graph.n_;
     int md = 0;
-    vector<int>  bin(g.n_ + 10);
-    vector<int>  pos(g.n_ + 10);
-    vector<int>  vert(g.n_ + 10);
+    vector<int>  bin(graph.n_ + 10);
+    vector<int>  pos(graph.n_ + 10);
+    vector<int>  vert(graph.n_ + 10);
 
     vector<int> deg;
-    for(int v = 0; v < n; v++) deg.push_back(g.edge_[v].size());
+    for(int v = 0; v < n; v++) deg.push_back(graph.edge_[v].size());
     for(auto deg_v:deg)
         md = max(md, deg_v);
 
-
+//    int size = 0;
+//    for(auto deg_v:deg) size += deg_v;
+//    cout<<deg.size()<<" "<<graph.n_<<endl;
+//    cout<<size<<" "<<graph.m_*2<<endl;
     for(int d = 0; d <= md; d++) bin[d] = 0;
     for(int v = 0; v < n; v++) bin[deg[v]]++;
     int start = 0;
@@ -31,16 +34,16 @@ CoresDelLine FindCores(Graph g){
         vert[pos[v]] = v;
         bin[deg[v]]++;
     }
-
+    cout<<"md="<<md<<endl;
     for(int d = md; d>=1; d--){
         bin[d] = bin[d-1];
     }
-    bin[0] = 1;
+    bin[0] = 0;
     CoresDelLine cores_del_line;
     //cout<<"n="<<n<<endl;
     for(int st = 0; st < n; st++){
         int v = vert[st];
-        vector<Edge> &edge_v  = g.edge_[v];
+
        // cout<<st<<" "<<v<<" "<<deg[v]<< endl;
         if(cores_del_line.size()==0 || deg[v]>cores_del_line[cores_del_line.size()-1].k_){
             CoresDelVertex del_vertex;
@@ -50,12 +53,15 @@ CoresDelLine FindCores(Graph g){
         }else{
             cores_del_line[cores_del_line.size()-1].del_vertex_.push_back(v);
         }
+        vector<Edge> edge_v  = graph.edge_[v];
         for(int i = 0; i < edge_v.size(); i++){
-            int u = edge_v[i].point_ , w = edge_v[i].weight_;
+            int u = edge_v[i].point_;
 
             if(deg[u]>deg[v]){
                 int du = deg[u];
                 int pu = pos[u];
+
+                assert(st < pu);
                 int pw = bin[du];
                 int w = vert[pw];
                 if(u != w){
@@ -69,9 +75,10 @@ CoresDelLine FindCores(Graph g){
         }
     }
     for(int i = 0; i < cores_del_line.size(); i++){
-        printf("%d ",cores_del_line[i].k_);
+        if(i < cores_del_line.size() - 1) continue;
+        printf("Core'K=%d Size=%d",cores_del_line[i].k_, cores_del_line[i].del_vertex_.size());
         for(int j = 0; j < cores_del_line[i].del_vertex_.size(); j++){
-            printf("%d ",cores_del_line[i].del_vertex_[j] + 1);
+            printf("%d %d\n",cores_del_line[i].del_vertex_[j] + 1,deg[cores_del_line[i].del_vertex_[j]]);
         }
         printf("\n");
     }

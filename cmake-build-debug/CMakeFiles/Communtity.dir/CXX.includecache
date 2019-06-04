@@ -6,6 +6,22 @@
 
 #IncludeRegexTransform: 
 
+/Users/gjy/CLionProjects/Community/condition.h
+include.h
+/Users/gjy/CLionProjects/Community/include.h
+
+/Users/gjy/CLionProjects/Community/cores.h
+include.h
+/Users/gjy/CLionProjects/Community/include.h
+graph.h
+/Users/gjy/CLionProjects/Community/graph.h
+condition.h
+/Users/gjy/CLionProjects/Community/condition.h
+
+/Users/gjy/CLionProjects/Community/file_manage.h
+include.h
+/Users/gjy/CLionProjects/Community/include.h
+
 /Users/gjy/CLionProjects/Community/graph.h
 include.h
 /Users/gjy/CLionProjects/Community/include.h
@@ -25,6 +41,8 @@ string
 -
 unordered_map
 -
+map
+-
 ext/hash_map
 -
 hash_map
@@ -42,11 +60,27 @@ dirent.h
 fstream
 -
 
-/Users/gjy/CLionProjects/Community/ks_core.cpp
+/Users/gjy/CLionProjects/Community/ks_core.h
+include.h
+/Users/gjy/CLionProjects/Community/include.h
+graph.h
+/Users/gjy/CLionProjects/Community/graph.h
+
+/Users/gjy/CLionProjects/Community/main.cpp
+include.h
+/Users/gjy/CLionProjects/Community/include.h
+cores.h
+/Users/gjy/CLionProjects/Community/cores.h
+truss.h
+/Users/gjy/CLionProjects/Community/truss.h
 ks_core.h
 /Users/gjy/CLionProjects/Community/ks_core.h
+graph.h
+/Users/gjy/CLionProjects/Community/graph.h
+file_manage.h
+/Users/gjy/CLionProjects/Community/file_manage.h
 
-/Users/gjy/CLionProjects/Community/ks_core.h
+/Users/gjy/CLionProjects/Community/truss.h
 include.h
 /Users/gjy/CLionProjects/Community/include.h
 graph.h
