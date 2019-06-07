@@ -11,8 +11,12 @@ CMakeFiles/Communtity.dir/core.cpp.o: ../core.h
 CMakeFiles/Communtity.dir/core.cpp.o: ../graph.h
 CMakeFiles/Communtity.dir/core.cpp.o: ../include.h
 
+CMakeFiles/Communtity.dir/ego_community.cpp.o: ../condition.h
+CMakeFiles/Communtity.dir/ego_community.cpp.o: ../core.h
 CMakeFiles/Communtity.dir/ego_community.cpp.o: ../ego_community.cpp
 CMakeFiles/Communtity.dir/ego_community.cpp.o: ../ego_community.h
+CMakeFiles/Communtity.dir/ego_community.cpp.o: ../graph.h
+CMakeFiles/Communtity.dir/ego_community.cpp.o: ../include.h
 
 CMakeFiles/Communtity.dir/file_manage.cpp.o: ../file_manage.cpp
 CMakeFiles/Communtity.dir/file_manage.cpp.o: ../file_manage.h
@@ -32,6 +36,7 @@ CMakeFiles/Communtity.dir/ks_core.cpp.o: ../ks_core.h
 
 CMakeFiles/Communtity.dir/main.cpp.o: ../condition.h
 CMakeFiles/Communtity.dir/main.cpp.o: ../core.h
+CMakeFiles/Communtity.dir/main.cpp.o: ../ego_community.h
 CMakeFiles/Communtity.dir/main.cpp.o: ../file_manage.h
 CMakeFiles/Communtity.dir/main.cpp.o: ../graph.h
 CMakeFiles/Communtity.dir/main.cpp.o: ../include.h

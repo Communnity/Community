@@ -37,5 +37,6 @@ void read(double &x);
 int ran(int x);
 char* StrToChar(string str);
 void ReidGraph();
+const int INF = 1000000000;
 
 #endif //Communtity_INCLUDE_H

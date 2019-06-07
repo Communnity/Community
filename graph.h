@@ -9,6 +9,8 @@
 const int c_Max_Vertex_Num =  5000010;
 const int c_Max_Edge_Num = 50010010;
 typedef  vector<int> Neighbor;
+typedef  vector<int> Core;
+
 class Edge{
     public:
         int point_;
@@ -47,13 +49,14 @@ class Graph{
         void InputGraphWithAttribute();
         void OutputGraph();
         void OutputOriginalGraph();
+        Graph RenewGraphwithReid();
         Graph RenewGraph();
         int CalEdgeNum();
         void RandomInputGraph();
         void ClearGraph();
         Neighbor NeighborOneVertex(int u);
         Neighbor NeighborTwoVertex(int u, int v);
-
+        bool empty();
 };
 
 class EgoGraph:public Graph{

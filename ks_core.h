@@ -7,9 +7,7 @@
 
 #include "include.h"
 #include "graph.h"
-class KSCore {
 
-};
 bool ComputeKSCore(Graph graph, int para_k, int para_s);
 bool KCliqueCommunity(Graph graph, int para_k);
 

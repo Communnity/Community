@@ -27,6 +27,12 @@ ego_community.h
 /Users/gjy/CLionProjects/Community/ego_community.h
 
 /Users/gjy/CLionProjects/Community/ego_community.h
+include.h
+/Users/gjy/CLionProjects/Community/include.h
+graph.h
+/Users/gjy/CLionProjects/Community/graph.h
+core.h
+/Users/gjy/CLionProjects/Community/core.h
 
 /Users/gjy/CLionProjects/Community/file_manage.h
 include.h
@@ -89,6 +95,8 @@ graph.h
 /Users/gjy/CLionProjects/Community/graph.h
 file_manage.h
 /Users/gjy/CLionProjects/Community/file_manage.h
+ego_community.h
+/Users/gjy/CLionProjects/Community/ego_community.h
 
 /Users/gjy/CLionProjects/Community/truss.h
 include.h

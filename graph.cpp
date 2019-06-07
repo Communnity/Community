@@ -63,9 +63,9 @@ void Graph:: Init(){
     }
 }
 void Graph:: RandomInputGraph(){
-    srand(time(NULL));
-    this->n_ = 15 ;
-    this->m_ = ran(this->n_ * (this->n_ - 1) / 3);
+
+    this->n_ = 20 ;
+    this->m_ = ran(this->n_ * (this->n_ - 1) / 2);
     this->Init();
     for(int u = 0; u < this->n_; ++u){
         this->exist_vertex_[u] = 1;
@@ -76,6 +76,7 @@ void Graph:: RandomInputGraph(){
         do {
             u = ran(this->n_);
             v = ran(this->n_);
+            assert(u > 0 && v > 0);
             u--;
             v--;
         }while(u == v || this->exist_edge_[EdgeId(u, v)]);
@@ -153,6 +154,27 @@ void Graph::OutputGraph() {
     }
 }
 Graph Graph::RenewGraph(){
+    Graph new_graph;
+    new_graph.n_ = this->n_;
+    new_graph.m_ = 0;
+    new_graph.Init();
+    for(int u = 0; u < new_graph.n_; u++)
+        new_graph.exist_vertex_[u] = this->exist_vertex_[u];
+    for(int u = 0; u < this->n_; u++) if(this->exist_vertex_[u]){
+            for(auto edge_u:this->edge_[u]){
+                int v = edge_u.point_;
+                if(!this->exist_vertex_[v]) continue;
+                if(!this->exist_edge_[EdgeId(u, v)]) continue;
+                if(new_graph.exist_edge_[EdgeId(u, v)]) continue;
+                new_graph.edge_[u].push_back(Edge(v,0));
+                new_graph.edge_[v].push_back(Edge(u,0));
+                new_graph.exist_edge_[EdgeId(u, v)] = 1;
+                new_graph.m_++;
+            }
+        }
+    return new_graph;
+}
+Graph Graph::RenewGraphwithReid(){
     vector<int> id(this->n_);
     int vertex_id = 0;
     Graph new_graph;
@@ -162,8 +184,11 @@ Graph Graph::RenewGraph(){
     } else
         id[u] = -1;
     new_graph.n_ = vertex_id;
+
+
     new_graph.m_ = 0;
     new_graph.Init();
+
     for(int u = 0; u < new_graph.n_; u++)
         new_graph.exist_vertex_[u] = 1;
     for(int u = 0; u < this->n_; u++) if(this->exist_vertex_[u]){

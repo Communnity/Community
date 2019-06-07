@@ -4,8 +4,35 @@
 
 #include "truss.h"
 
+Graph BuildTruss(Truss_sup truss_sup, int truss_k){
+    Graph truss;
+    truss.n_ = truss.m_ = 0;
+    for(int  i = 0; i < truss_sup.size(); i++){
+        int u = truss_sup[i].u_, v = truss_sup[i].v_ , sup = truss_sup[i].sup_;
+        if(sup < truss_k) continue;
+        truss.n_ = max(truss.n_, max(u,v) + 1);
+    }
 
-Truss ComputerSup(Graph graph){
+    truss.Init();// must give n to init edge[1]....edge[n]
+
+    for(int  i = 0; i < truss_sup.size(); i++){
+        int u = truss_sup[i].u_, v = truss_sup[i].v_ , sup = truss_sup[i].sup_;
+        if(sup < truss_k) continue;
+
+        truss.exist_vertex_[u]  = truss.exist_vertex_[v] = 1;
+        truss.edge_[u].push_back(Edge(v,0));
+        truss.edge_[v].push_back(Edge(u,0));
+        truss.exist_edge_[EdgeId(u,v)] = 1;
+
+        truss.m_++;
+    }
+
+
+
+    truss  = truss.RenewGraphwithReid();
+    return truss;
+}
+Truss_sup ComputerSup(Graph graph){
     vector<int> deg;
     for(int v = 0; v < graph.n_; v++){
         deg.push_back(graph.edge_[v].size());
@@ -22,8 +49,6 @@ Truss ComputerSup(Graph graph){
             vec_sup_edge.push_back(sup_edge);
         }
     }
-
-
     for(auto &sup_edge:vec_sup_edge){
        int triangle_v = sup_edge.v_, triangle_u = sup_edge.u_;
        if(deg[triangle_u] > deg[triangle_v]) swap(triangle_v,triangle_u);
@@ -53,7 +78,7 @@ void ReorderSupEdge(int e1 , vector<SupEdge> &vec_sup_edge, vector<int> &pos, ve
     bin[sup_e1]++;vec_sup_edge[e1].sup_--;
 
 }
-Truss FindTruss(Graph graph){
+Truss_sup FindTruss(Graph graph){
 
     int max_sup = 0;
     int n = graph.n_;
@@ -62,7 +87,7 @@ Truss FindTruss(Graph graph){
     vector<int>  bin(vec_sup_edge.size() + 10);  // bin[x] = (sup_edge = x)'start
     vector<int>  pos(vec_sup_edge.size() + 10);  // sup_edge'pos in edge array
     vector<int>  edge(vec_sup_edge.size() + 10); // edge order by sup
-    Truss truss;
+    Truss_sup truss;
     SupEdge empty_sup_edge;
     for(int i = 0; i < vec_sup_edge.size(); i++) truss.push_back(empty_sup_edge);
 
@@ -100,14 +125,16 @@ Truss FindTruss(Graph graph){
         assert(v < u);
         exist_edge[EdgeId(v, u)] = i;
     }
-
+    int truss_k = 0;
     for(int st = 0; st < vec_sup_edge.size(); st++){
 
         int v = vec_sup_edge[edge[st]].v_;
         int u = vec_sup_edge[edge[st]].u_;
 
         assert(v < u);
+        truss_k = max(truss_k, vec_sup_edge[edge[st]].sup_);
         truss[edge[st]] = vec_sup_edge[edge[st]];
+        truss[edge[st]].sup_ = truss_k;
         if(deg[v] > deg[u]) swap(v,u);
         assert(exist_edge.find(EdgeId(v,u)) != exist_edge.end());
         assert(deg[v] > 0);

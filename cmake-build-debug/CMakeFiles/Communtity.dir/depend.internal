@@ -12,8 +12,12 @@ CMakeFiles/Communtity.dir/core.cpp.o
  /Users/gjy/CLionProjects/Community/graph.h
  /Users/gjy/CLionProjects/Community/include.h
 CMakeFiles/Communtity.dir/ego_community.cpp.o
+ /Users/gjy/CLionProjects/Community/condition.h
+ /Users/gjy/CLionProjects/Community/core.h
  /Users/gjy/CLionProjects/Community/ego_community.cpp
  /Users/gjy/CLionProjects/Community/ego_community.h
+ /Users/gjy/CLionProjects/Community/graph.h
+ /Users/gjy/CLionProjects/Community/include.h
 CMakeFiles/Communtity.dir/file_manage.cpp.o
  /Users/gjy/CLionProjects/Community/file_manage.cpp
  /Users/gjy/CLionProjects/Community/file_manage.h
@@ -33,6 +37,7 @@ CMakeFiles/Communtity.dir/ks_core.cpp.o
 CMakeFiles/Communtity.dir/main.cpp.o
  /Users/gjy/CLionProjects/Community/condition.h
  /Users/gjy/CLionProjects/Community/core.h
+ /Users/gjy/CLionProjects/Community/ego_community.h
  /Users/gjy/CLionProjects/Community/file_manage.h
  /Users/gjy/CLionProjects/Community/graph.h
  /Users/gjy/CLionProjects/Community/include.h

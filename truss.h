@@ -6,10 +6,9 @@
 #define COMMUNTITY_TRUSS_H
 #include "include.h"
 #include "graph.h"
-typedef vector<SupEdge> Truss;
-Truss FindTruss(Graph graph);
-Truss ComputerSup(Graph graph);
-
-
+typedef vector<SupEdge> Truss_sup;
+Truss_sup FindTruss(Graph graph);
+Truss_sup ComputerSup(Graph graph);
+Graph BuildTruss(Truss_sup truss_sup, int truss_k);
 
 #endif //COMMUNTITY_TRUSS_H
