@@ -4,7 +4,7 @@
 
 #ifndef Communtity_INCLUDE_H
 #define Communtity_INCLUDE_H
-
+//#define DEBUG 1
 
 #include<vector>
 #include<iostream>
@@ -14,6 +14,7 @@
 #include<string>
 #include<unordered_map>
 #include<map>
+#include<queue>
 #if defined __GNUC__ || defined __APPLE__
 #include <ext/hash_map>
 #else
@@ -29,7 +30,15 @@
 #endif
 #include <dirent.h>
 #include<fstream>
-
+#ifdef DEBUG
+#define LOG(x) cout<<x<<endl;
+#define LOG2(x, y) cout<<x<<" "<<y<<endl;
+#define LOG3(x, y, z) cout<<x<<" "<<y<<" "<<z<<endl;
+#else
+#define LOG(x)
+#define LOG2(x, y)
+#define LOG3(x, y, z)
+#endif
 using namespace std;
 using namespace __gnu_cxx;
 void read(int &x);

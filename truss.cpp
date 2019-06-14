@@ -84,8 +84,8 @@ Truss_sup FindTruss(Graph graph){
     int n = graph.n_;
     int m = graph.CalEdgeNum();
     vector<SupEdge> vec_sup_edge = ComputerSup(graph);
-    vector<int>  bin(vec_sup_edge.size() + 10);  // bin[x] = (sup_edge = x)'start
-    vector<int>  pos(vec_sup_edge.size() + 10);  // sup_edge'pos in edge array
+    vector<int>  bin(vec_sup_edge.size() + 10);  // bin_[x] = (sup_edge = x)'start_
+    vector<int>  pos(vec_sup_edge.size() + 10);  // sup_edge'pos_ in edge array
     vector<int>  edge(vec_sup_edge.size() + 10); // edge order by sup
     Truss_sup truss;
     SupEdge empty_sup_edge;

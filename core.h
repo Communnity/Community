@@ -20,6 +20,20 @@ class Cores{
         int k_;
         vector<int> vertex_;
 };
+class CoreGraph{
+    public:
+        int n_, k_;
+        vector<int> vertex_;
+        vector<int> exsit_vertex_;
+        vector<int> deg_;
+        unordered_map<int, int>  core_vertex_id_;
+};
+class CoreBucket{
+
+    public:
+        vector<int> bin_,pos_,vert_;
+        int start_;
+};
 CoreDelLine  FindCore(Graph &graph);
 Graph FindKCore(Graph graph);
 bool CheckCoresDelLine(Graph graph, CoreDelLine cores_del_line);

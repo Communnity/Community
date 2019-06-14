@@ -56,7 +56,7 @@ bool ComputeKSCore(Graph graph, int para_k, int para_s){
         }
         int u = FindMinKSDegreeVertex(graph, para_k, para_s);
         if(u >= 0){
-            DeleteVertex(graph, u);
+            graph.DeleteVertex(u);
 
         } else
             min_ks_degree = 1;

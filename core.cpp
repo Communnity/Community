@@ -88,7 +88,7 @@ CoreDelLine FindCore(Graph &graph){
     //cout<<"n="<<n<<endl;
     for(int st = 0; st < n; st++){
         int v = vert[st], deg_v = deg[v];
-        Modify(v,0,deg,bin,vert,pos);
+        // Modify(v,0,deg,bin,vert,pos); may be wrong if deg_v == 0
         // cout<<st<<" "<<v<<" "<<deg[v]<< endl;
         if(core_del_line.size()==0 || deg_v>core_del_line[core_del_line.size()-1].k_){
             CoreDelVertex del_vertex;

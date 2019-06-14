@@ -10,10 +10,6 @@
 include.h
 /Users/gjy/CLionProjects/Community/include.h
 
-/Users/gjy/CLionProjects/Community/core.cpp
-core.h
-/Users/gjy/CLionProjects/Community/core.h
-
 /Users/gjy/CLionProjects/Community/core.h
 include.h
 /Users/gjy/CLionProjects/Community/include.h
@@ -21,10 +17,6 @@ graph.h
 /Users/gjy/CLionProjects/Community/graph.h
 condition.h
 /Users/gjy/CLionProjects/Community/condition.h
-
-/Users/gjy/CLionProjects/Community/ego_community.cpp
-ego_community.h
-/Users/gjy/CLionProjects/Community/ego_community.h
 
 /Users/gjy/CLionProjects/Community/ego_community.h
 include.h
@@ -37,6 +29,10 @@ core.h
 /Users/gjy/CLionProjects/Community/file_manage.h
 include.h
 /Users/gjy/CLionProjects/Community/include.h
+
+/Users/gjy/CLionProjects/Community/graph.cpp
+graph.h
+/Users/gjy/CLionProjects/Community/graph.h
 
 /Users/gjy/CLionProjects/Community/graph.h
 include.h
@@ -58,6 +54,8 @@ string
 unordered_map
 -
 map
+-
+queue
 -
 ext/hash_map
 -

@@ -57,6 +57,7 @@ class Graph{
         Neighbor NeighborOneVertex(int u);
         Neighbor NeighborTwoVertex(int u, int v);
         bool empty();
+        void DeleteVertex(int u);
 };
 
 class EgoGraph:public Graph{
@@ -66,7 +67,6 @@ class EgoGraph:public Graph{
 
 Graph ExtractSubgraph(Graph g,vector<int> need);
 
-void DeleteVertex(Graph &graph, int u);
 Graph InputGraphWithAddColor();
 void OutputGraph(Graph graph);
 long long EdgeId(int u, int v);

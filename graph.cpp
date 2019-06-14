@@ -24,30 +24,40 @@ Neighbor Graph::NeighborOneVertex(int u){
     return neighbor_u;
 }
 Neighbor Graph::NeighborTwoVertex(int u, int v){
-    Neighbor neighbor_u, neighbor_v,neighbor_u_v;
-    neighbor_u = this->NeighborOneVertex(u);
-    neighbor_v = this->NeighborOneVertex(v);
-
-    int u_i = 0, v_i = 0;
-    while(u_i < neighbor_u.size() && v_i < neighbor_v.size()){
-        if(neighbor_u[u_i] < neighbor_v[v_i]) u_i++;
-        else if(neighbor_u[u_i]>neighbor_v[v_i]) v_i++;
-        else if(neighbor_u[u_i] == neighbor_v[v_i]){
-            neighbor_u_v.push_back(neighbor_u[u_i]);
-            u_i++;
-            v_i++;
+//    Neighbor neighbor_u, neighbor_v,neighbor_u_v;
+//    neighbor_u = this->NeighborOneVertex(u);
+//    neighbor_v = this->NeighborOneVertex(v);
+//
+//    int u_i = 0, v_i = 0;
+//    while(u_i < neighbor_u.size() && v_i < neighbor_v.size()){
+//        if(neighbor_u[u_i] < neighbor_v[v_i]) u_i++;
+//        else if(neighbor_u[u_i]>neighbor_v[v_i]) v_i++;
+//        else if(neighbor_u[u_i] == neighbor_v[v_i]){
+//            neighbor_u_v.push_back(neighbor_u[u_i]);
+//            u_i++;
+//            v_i++;
+//        }
+//        else assert(0);
+//    }
+    Neighbor neighbor_u_v;
+    int use_u = u, use_v = v;
+    int deg_u = 0;
+    if (this->edge_[v].size() < this->edge_[u].size()) swap(use_u, use_v);
+    for (auto edge_use_u:this->edge_[use_u]) {
+        int w = edge_use_u.point_;
+        if (this->exist_edge_.find(EdgeId(use_v, w)) != this->exist_edge_.end()) {
+            neighbor_u_v.push_back(w);
         }
-        else assert(0);
     }
     return neighbor_u_v;
 }
-void DeleteVertex(Graph &graph, int u){
-    graph.exist_vertex_[u] = 0;
-    for(auto edge_u:graph.edge_[u]){
+void Graph:: DeleteVertex(int u){
+    this->exist_vertex_[u] = 0;
+    for(auto edge_u:this->edge_[u]){
         int v = edge_u.point_;
 
-        if(graph.exist_vertex_[v] == 0)continue;
-        graph.exist_edge_[EdgeId(u, v)] = 0;
+        if(this->exist_vertex_[v] == 0)continue;
+        this->exist_edge_[EdgeId(u, v)] = 0;
     }
 
 }
@@ -64,7 +74,7 @@ void Graph:: Init(){
 }
 void Graph:: RandomInputGraph(){
 
-    this->n_ = 20 ;
+    this->n_ = 9;
     this->m_ = ran(this->n_ * (this->n_ - 1) / 2);
     this->Init();
     for(int u = 0; u < this->n_; ++u){
