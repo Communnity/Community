@@ -74,7 +74,7 @@ void Graph:: Init(){
 }
 void Graph:: RandomInputGraph(){
 
-    this->n_ = 9;
+    this->n_ = 1000;
     this->m_ = ran(this->n_ * (this->n_ - 1) / 2);
     this->Init();
     for(int u = 0; u < this->n_; ++u){

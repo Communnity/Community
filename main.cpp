@@ -7,22 +7,48 @@
 #include "file_manage.h"
 #include "ego_community.h"
 void TestDataset(Graph &graph){
-    //Get core'K
+
+    clock_t start,finish; //定义开始，结束变量
+    double duration;
+    // Get core'K
+    start = clock();//初始化
     CoreDelLine core_del_line = FindCore(graph);
     cout << "Core'K="<<core_del_line[core_del_line.size()-1].k_<<endl;
-////Get truss'K
-//    Truss_sup truss = FindTruss(graph);
-//    int max_truss = 0;
-//    for (int i = 0; i < graph.m_; i++) max_truss = max(max_truss, truss[i].sup_);
-//    cout << "Truss_sup'K="<<max_truss << endl;
-////Get the number of triangle
-//    Truss_sup sup_edge = ComputerSup(graph);
-//    int sum_truss = 0;
-//    for(int i = 0; i < graph.m_; i++) sum_truss += sup_edge[i].sup_;
-//    cout<<"the number of triangles="<< sum_truss/3 <<endl;
-////Get ego_core'K
-//    EgoCoreDelLine ego_core_del_line = EgoCoreBaseline(graph);
-//    cout << "Ego_Core'K="<<ego_core_del_line[ego_core_del_line.size()-1].k_<<endl;
+    finish = clock();//初始化结束时间
+    duration = (double)(finish - start) / CLOCKS_PER_SEC;//转换浮点型
+    printf( "TestCore %lf seconds\n", duration );
+
+//Get truss'K
+    start = clock();//初始化
+    Truss_sup truss = FindTruss(graph);
+    int max_truss = 0;
+    for (int i = 0; i < graph.m_; i++) max_truss = max(max_truss, truss[i].sup_);
+    cout << "Truss_sup'K="<<max_truss << endl;
+    finish = clock();//初始化结束时间
+    duration = (double)(finish - start) / CLOCKS_PER_SEC;//转换浮点型
+    printf( "TestTruss %lf seconds\n", duration );
+
+//Get the number of triangle
+    start = clock();//初始化
+    Truss_sup sup_edge = ComputerSup(graph);
+    int sum_truss = 0;
+    for(int i = 0; i < graph.m_; i++) sum_truss += sup_edge[i].sup_;
+    cout<<"the number of triangles="<< sum_truss/3 <<endl;
+    finish = clock();//初始化结束时间
+    duration = (double)(finish - start) / CLOCKS_PER_SEC;//转换浮点型
+    printf( "Testtriangle %lf seconds\n", duration );
+
+
+//Gej ego_core'K
+    start = clock();//初始化
+    EgoCoreDelLine  ego_core_del_line = EgoCore(graph);
+    cout << "Ego_Core'K="<<ego_core_del_line[ego_core_del_line.size()-1].k_<<endl;
+    finish = clock();//初始化结束时间
+    duration = (double)(finish - start) / CLOCKS_PER_SEC;//转换浮点型
+    printf( "TestEgo_Core %lf seconds\n", duration );
+////Get ego_core_baseline'K
+//    EgoCoreDelLine ego_core_del_line_bl = EgoCoreBaseline(graph);
+//    cout << "Ego_Core_baseline'K="<<ego_core_del_line_bl[ego_core_del_line_bl.size()-1].k_<<endl;
 }
 void Print(EgoCoreDelLine ego_core_del_line, string str){
     for(auto del_line:ego_core_del_line) {
@@ -32,13 +58,11 @@ void Print(EgoCoreDelLine ego_core_del_line, string str){
         }
     }
 }
-int  Compapre(EgoCoreDelLine ego_core_del_line,EgoCoreDelLine ego_core_del_line_bl){
+int  Compapre(EgoCoreDelLine &ego_core_del_line,EgoCoreDelLine &ego_core_del_line_bl){
     if(ego_core_del_line.size() != ego_core_del_line_bl.size()) return 0;
     for(int i = 0; i < ego_core_del_line.size();i++){
         if(ego_core_del_line[i].k_ != ego_core_del_line_bl[i].k_) return 0;
         if(ego_core_del_line[i].del_vertex_.size() != ego_core_del_line_bl[i].del_vertex_.size()) return 0;
-        sort(ego_core_del_line[i].del_vertex_.begin(), ego_core_del_line[i].del_vertex_.end());
-        sort(ego_core_del_line_bl[i].del_vertex_.begin(), ego_core_del_line_bl[i].del_vertex_.end());
         for(int j = 0; j < ego_core_del_line[i].del_vertex_.size(); j++)
             if(ego_core_del_line[i].del_vertex_[j] != ego_core_del_line_bl[i].del_vertex_[j]) return 0;
     }
@@ -52,7 +76,8 @@ void TestEgo(){
         graph.RandomInputGraph();
         ego_core_del_line_bl = EgoCoreBaseline(graph);
         ego_core_del_line = EgoCore(graph);
-
+        for(int i = 0; i < ego_core_del_line.size();i++) sort(ego_core_del_line[i].del_vertex_.begin(), ego_core_del_line[i].del_vertex_.end());
+        for(int i = 0; i < ego_core_del_line_bl.size();i++) sort(ego_core_del_line_bl[i].del_vertex_.begin(), ego_core_del_line_bl[i].del_vertex_.end());
     }while(Compapre(ego_core_del_line,ego_core_del_line_bl) == 1);
     graph.OutputOriginalGraph();
     Print(ego_core_del_line,"ego_core_del_line");
@@ -91,20 +116,19 @@ int main() {
 
     //freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/foursquare_extend/foursquare_extend.inf","r",stdin);
 
-//    freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/youtube/com-youtube.ungraph-reid.txt", "r", stdin);
- //   freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/facebook/facebook-combined-reid.txt", "r", stdin);
-    freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/small/test-graph.in", "r", stdin);
+  //  freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/youtube/com-youtube.ungraph-reid.txt", "r", stdin);
+    freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/facebook/facebook-combined-reid.txt", "r", stdin);
+  // freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/small/test-graph.in", "r", stdin);
 //    freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/com-LiveJournal/com-LiveJournal-ungraph.txt", "r", stdin);
-//    Graph graph;
-//    graph.InputGraph();
-//    clock_t start,finish; //定义开始，结束变量
-//    start = clock();//初始化
-//    TestDataset(graph);
-//    finish = clock();//初始化结束时间
-//    double duration = (double)(finish - start) / CLOCKS_PER_SEC;//转换浮点型
-//    printf( "%lf seconds\n", duration );
-    TestEgo();
-
+    Graph graph;
+    graph.InputGraph();
+    clock_t start,finish; //定义开始，结束变量
+    start = clock();//初始化
+    TestDataset(graph);
+    finish = clock();//初始化结束时间
+    double duration = (double)(finish - start) / CLOCKS_PER_SEC;//转换浮点型
+    printf( "TestDataset %lf seconds\n", duration );
+    //TestEgo();
 
 
 //    CoreDelLine cores_del_line = FindCore(graph);
