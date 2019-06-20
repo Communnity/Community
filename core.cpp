@@ -55,7 +55,14 @@ void Modify(int u, int modify_degree,vector<int> &deg, vector<int> &bin,vector<i
 }
 
 CoreDelLine FindCore(Graph &graph){
+    CoreDelLine core_del_line;
     int n = graph.n_;
+    if(n == 0){
+        CoreDelVertex del_vertex;
+        del_vertex.k_ = -1;
+        core_del_line.push_back(del_vertex);
+        return core_del_line;
+    }
     int md = 0;
     vector<int>  bin(graph.n_ + 10);
     vector<int>  pos(graph.n_ + 10);
@@ -84,7 +91,7 @@ CoreDelLine FindCore(Graph &graph){
         bin[d] = bin[d-1];
     }
     bin[0] = 0;
-    CoreDelLine core_del_line;
+
     //cout<<"n="<<n<<endl;
     for(int st = 0; st < n; st++){
         int v = vert[st], deg_v = deg[v];

@@ -39,13 +39,21 @@ void TestDataset(Graph &graph){
     printf( "Testtriangle %lf seconds\n", duration );
 
 
-//Gej ego_core'K
+//Get ego_core'K
     start = clock();//初始化
     EgoCoreDelLine  ego_core_del_line = EgoCore(graph);
     cout << "Ego_Core'K="<<ego_core_del_line[ego_core_del_line.size()-1].k_<<endl;
     finish = clock();//初始化结束时间
     duration = (double)(finish - start) / CLOCKS_PER_SEC;//转换浮点型
     printf( "TestEgo_Core %lf seconds\n", duration );
+
+    //Get ego_core_fast'K
+//    start = clock();//初始化
+//    EgoCoreDelLine ego_core_del_line_fast = EgoCoreFast(graph);
+//    cout << "Ego_Core_Fast'K="<<ego_core_del_line_fast[ego_core_del_line_fast.size()-1].k_<<endl;
+//    finish = clock();//初始化结束时间
+//    duration = (double)(finish - start) / CLOCKS_PER_SEC;//转换浮点型
+//    printf( "TestEgo_Core %lf seconds\n", duration );
 ////Get ego_core_baseline'K
 //    EgoCoreDelLine ego_core_del_line_bl = EgoCoreBaseline(graph);
 //    cout << "Ego_Core_baseline'K="<<ego_core_del_line_bl[ego_core_del_line_bl.size()-1].k_<<endl;
@@ -73,9 +81,10 @@ void TestEgo(){
     EgoCoreDelLine ego_core_del_line_bl,ego_core_del_line;
     do {
         graph.ClearGraph();
-        graph.RandomInputGraph();
+        graph.InputGraph();
+
         ego_core_del_line_bl = EgoCoreBaseline(graph);
-        ego_core_del_line = EgoCore(graph);
+        ego_core_del_line = EgoCoreFast(graph);
         for(int i = 0; i < ego_core_del_line.size();i++) sort(ego_core_del_line[i].del_vertex_.begin(), ego_core_del_line[i].del_vertex_.end());
         for(int i = 0; i < ego_core_del_line_bl.size();i++) sort(ego_core_del_line_bl[i].del_vertex_.begin(), ego_core_del_line_bl[i].del_vertex_.end());
     }while(Compapre(ego_core_del_line,ego_core_del_line_bl) == 1);
@@ -119,7 +128,9 @@ int main() {
   //  freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/youtube/com-youtube.ungraph-reid.txt", "r", stdin);
     freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/facebook/facebook-combined-reid.txt", "r", stdin);
   // freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/small/test-graph.in", "r", stdin);
-//    freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/com-LiveJournal/com-LiveJournal-ungraph.txt", "r", stdin);
+   // freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/com-LiveJournal/com-LiveJournal-ungraph.txt", "r", stdin);
+
+
     Graph graph;
     graph.InputGraph();
     clock_t start,finish; //定义开始，结束变量

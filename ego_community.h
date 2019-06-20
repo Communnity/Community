@@ -19,8 +19,15 @@ public:
     bool operator <(EgoCoreOfVertex element) const  {  return k_ < element.k_ ||(k_ == element.k_ && vertex_ > element.vertex_); }
     bool operator >(EgoCoreOfVertex element) const  {  return k_ > element.k_ ||(k_ == element.k_ && vertex_ > element.vertex_); }
 };
+class EgoVertex{
+public:
+    int v_, ego_;
+    EgoVertex(const int v, const int ego){v_ = v, ego_ = ego;}
+};
+
 typedef CoreDelVertex EgoCoreDelVertex;
 typedef CoreDelLine EgoCoreDelLine;
 EgoCoreDelLine EgoCoreBaseline(Graph graph);
 EgoCoreDelLine EgoCore(Graph graph);
+EgoCoreDelLine EgoCoreFast(Graph graph);
 #endif //COMMUNTITY_EGO_COMMUNITY_H
