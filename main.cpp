@@ -6,6 +6,7 @@
 #include "graph.h"
 #include "file_manage.h"
 #include "ego_community.h"
+#include "clique.h"
 void TestDataset(Graph &graph){
 
     clock_t start,finish; //定义开始，结束变量
@@ -14,6 +15,8 @@ void TestDataset(Graph &graph){
     start = clock();//初始化
     CoreDelLine core_del_line = FindCore(graph);
     cout << "Core'K="<<core_del_line[core_del_line.size()-1].k_<<endl;
+    sort(core_del_line[core_del_line.size()-1].del_vertex_.begin(), core_del_line[core_del_line.size()-1].del_vertex_.end());
+    for(auto v: core_del_line[core_del_line.size()-1].del_vertex_)cout<<v<<" ";cout<<endl;
     finish = clock();//初始化结束时间
     duration = (double)(finish - start) / CLOCKS_PER_SEC;//转换浮点型
     printf( "TestCore %lf seconds\n", duration );
@@ -43,6 +46,8 @@ void TestDataset(Graph &graph){
     start = clock();//初始化
     EgoCoreDelLine  ego_core_del_line = EgoCore(graph);
     cout << "Ego_Core'K="<<ego_core_del_line[ego_core_del_line.size()-1].k_<<endl;
+    sort(ego_core_del_line[ego_core_del_line.size()-1].del_vertex_.begin(),ego_core_del_line[ego_core_del_line.size()-1].del_vertex_.end());
+    for(auto v: ego_core_del_line[ego_core_del_line.size()-1].del_vertex_)cout<<v<<" ";cout<<endl;
     finish = clock();//初始化结束时间
     duration = (double)(finish - start) / CLOCKS_PER_SEC;//转换浮点型
     printf( "TestEgo_Core %lf seconds\n", duration );
@@ -54,9 +59,13 @@ void TestDataset(Graph &graph){
 //    finish = clock();//初始化结束时间
 //    duration = (double)(finish - start) / CLOCKS_PER_SEC;//转换浮点型
 //    printf( "TestEgo_Core %lf seconds\n", duration );
-////Get ego_core_baseline'K
+//Get ego_core_baseline'K
 //    EgoCoreDelLine ego_core_del_line_bl = EgoCoreBaseline(graph);
 //    cout << "Ego_Core_baseline'K="<<ego_core_del_line_bl[ego_core_del_line_bl.size()-1].k_<<endl;
+//    sort(ego_core_del_line_bl[ego_core_del_line_bl.size()-1].del_vertex_.begin(),ego_core_del_line_bl[ego_core_del_line_bl.size()-1].del_vertex_.end());
+//    for(auto v: ego_core_del_line_bl[ego_core_del_line_bl.size()-1].del_vertex_)cout<<v<<" ";cout<<endl;
+
+
 }
 void Print(EgoCoreDelLine ego_core_del_line, string str){
     for(auto del_line:ego_core_del_line) {
@@ -84,13 +93,30 @@ void TestEgo(){
         graph.InputGraph();
 
         ego_core_del_line_bl = EgoCoreBaseline(graph);
-        ego_core_del_line = EgoCoreFast(graph);
+        ego_core_del_line = EgoCore(graph);
+
+        Print(ego_core_del_line,"ego_core_del_line");
         for(int i = 0; i < ego_core_del_line.size();i++) sort(ego_core_del_line[i].del_vertex_.begin(), ego_core_del_line[i].del_vertex_.end());
         for(int i = 0; i < ego_core_del_line_bl.size();i++) sort(ego_core_del_line_bl[i].del_vertex_.begin(), ego_core_del_line_bl[i].del_vertex_.end());
     }while(Compapre(ego_core_del_line,ego_core_del_line_bl) == 1);
     graph.OutputOriginalGraph();
     Print(ego_core_del_line,"ego_core_del_line");
     Print(ego_core_del_line_bl,"ego_core_del_line_bl");
+
+}
+void TestClique(){
+    Graph graph;
+    graph.InputGraph();
+    for(int u = 0; u < graph.n_; u++){
+        sort(graph.edge_[u].begin(), graph.edge_[u].end(), EdgeCmp);
+    }
+    vector<int> empty_set, P;
+    int mc_size = 0;
+    for(int i = 0; i < graph.n_; i++) P.push_back(i);
+
+    BasicMCE(graph, P, empty_set, empty_set, mc_size);
+    graph.OutputOriginalGraph();
+    cout<<mc_size<<endl;
 
 }
 void CompareTrussandEgocore(){
@@ -115,22 +141,12 @@ void CompareTrussandEgocore(){
             graph.OutputGraph();
             break;
         }
-
     }while(1);
 }
 int main() {
     srand(time(NULL));
-    //freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/gowalla/gowalla.inf","r",stdin);
 
-
-    //freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/foursquare_extend/foursquare_extend.inf","r",stdin);
-
-  //  freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/youtube/com-youtube.ungraph-reid.txt", "r", stdin);
-    freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/facebook/facebook-combined-reid.txt", "r", stdin);
-  // freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/small/test-graph.in", "r", stdin);
-   // freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/com-LiveJournal/com-LiveJournal-ungraph.txt", "r", stdin);
-
-
+ 
     Graph graph;
     graph.InputGraph();
     clock_t start,finish; //定义开始，结束变量
@@ -139,31 +155,7 @@ int main() {
     finish = clock();//初始化结束时间
     double duration = (double)(finish - start) / CLOCKS_PER_SEC;//转换浮点型
     printf( "TestDataset %lf seconds\n", duration );
-    //TestEgo();
 
 
-//    CoreDelLine cores_del_line = FindCore(graph);
-//    cout<<"Check Cores Del Line : "<<CheckCoresDelLine(graph, cores_del_line)<<endl;
-
-//    string file_str = "/Users/gjy/Documents/社交网络与图论论文/dataset/small/query.in";
-//    NeedColorList need_color_vertex_list = InputNeedColorList(file_str);
-//
-//    Cores cores = FindLeastColorCores(graph, need_color_vertex_list, cores_del_line);
-//    cout<<cores.k_<<endl;
-//    for(int i = 0; i < cores.vertex_.size(); i++)
-//        cout<<(cores.vertex_[i]+1)<<" ";
-//    cout<<endl;
-
-//    Truss_sup truss = FindTruss(graph);
-//    for(int i = 0; i< truss.size();i++) printf("%d %d %d\n",truss[i].v_+1,truss[i].u_+1,truss[i].sup_);
-//    printf("\n");
-//    cout<<KCliqueCommunity(graph, 4)<<endl;
-//    while(1) {
-//        graph.ClearGraph();
-//        graph.RandomInputGraph();
-//        cout<<"------------------------"<<endl;
-//        cout << "Found= "<<KCliqueCommunity(graph, 5) << endl;
-//
-//    }
     return 0;
 }

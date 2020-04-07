@@ -249,6 +249,8 @@ EgoCoreDelLine EgoCore(Graph graph){
 long long HashTwo(int x, int y){
     return x * 1000000007LL + y;
 }
+
+//note:wrong wrong wrong
 EgoCoreDelLine EgoCoreFast(Graph graph){
 
     //note you should refine core bucket to support more O(1) opreations!

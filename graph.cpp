@@ -12,6 +12,9 @@ bool Graph::Empty() {
     for(int u = 0; u < this->n_; u++) if(this->exist_vertex_[u]) return false;
     return true;
 }
+bool EdgeCmp(Edge e1, Edge e2){
+    return e1.point_ < e2.point_;
+}
 Neighbor Graph::NeighborOneVertex(int u){
     Neighbor neighbor_u;
     for(auto edge_u:this->edge_[u]){
@@ -64,7 +67,7 @@ void Graph:: DeleteVertex(int u){
 
 void Graph:: Init(){
     for(int i =0 ; i < this->n_; ++i){
-        Vertex vertex;vertex.attribute_ = 0;
+        Vertex vertex;
         vertex_.push_back(vertex);
     }
     for(int i = 0; i < this->n_; ++i){
@@ -74,8 +77,10 @@ void Graph:: Init(){
 }
 void Graph:: RandomInputGraph(){
 
-    this->n_ = 4;
+    this->n_ = 10;
     this->m_ = ran(this->n_ * (this->n_ - 1) / 2);
+   // this->m_ = this->n_ * (this->n_ - 1) / 2 - 2 * this->n_;
+
     this->Init();
     for(int u = 0; u < this->n_; ++u){
         this->exist_vertex_[u] = 1;
@@ -96,7 +101,19 @@ void Graph:: RandomInputGraph(){
     }
 }
 void Graph:: InputGraph(){
+    //freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/gowalla/gowalla.inf","r",stdin);
+
+
+    //freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/foursquare_extend/foursquare_extend.inf","r",stdin);
+
+     // freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/youtube/com-youtube.ungraph-reid.txt", "r", stdin);
+     //freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/facebook/facebook-combined-reid.txt", "r", stdin);
+    freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/small/dblp-graph.in", "r", stdin);
+    //freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/small/easyclique.in", "r", stdin);
+    // freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/com-LiveJournal/com-LiveJournal-ungraph.txt", "r", stdin);
+
     read(this->n_); read(this->m_);
+    cerr<<"n="<<this->n_<<" "<<"m="<<this->m_<<endl;
     this->Init();
     for(int u = 0; u < this->n_; ++u){
         this->exist_vertex_[u] = 1;
@@ -110,7 +127,9 @@ void Graph:: InputGraph(){
         assert(y > 0 && y <= this->n_);
         x--;y--;//[0,N)
         //cout<<x<<" "<<y<<" "<<w1<<" "<<w2<<endl;
+        if(x==y)cerr<<x<<" "<<y;
         assert(x != y);
+
         assert(this->exist_edge_[EdgeId(x, y)] == 0);
         this->edge_[x].push_back(Edge(y,0));
         this->edge_[y].push_back(Edge(x,0));
@@ -240,9 +259,7 @@ void OutputGraph(Graph graph, string file_str){
     FILE *fp = fopen(file_s, "w");
 
     fprintf(fp, "%d %d\n",graph.n_,graph.m_);
-    for(int i = 0; i < graph.n_; ++i){
-        fprintf(fp, "%d\n",graph.vertex_[i]);//[1,100]
-    }
+
     for(int v = 0; v < graph.m_; ++v){
         for(int i = 0; i < graph.edge_[v].size(); i++){
             int u = graph.edge_[v][i].point_;
@@ -252,12 +269,13 @@ void OutputGraph(Graph graph, string file_str){
 }
 
 Graph::Graph(void) {
+
 }
 Graph::Graph(int n, int m){
     this->n_ = n;
     this->m_ = m;
     for(int i =0 ; i < this->n_; ++i){
-        Vertex vertex;vertex.attribute_ = 0;
+        Vertex vertex;
         vertex_.push_back(vertex);
     }
     for(int i = 0; i < this->m_; ++i){

@@ -6,8 +6,7 @@
 #define Communtity_GRAPH_H
 
 #include "include.h"
-const int c_Max_Vertex_Num =  5000010;
-const int c_Max_Edge_Num = 50010010;
+
 typedef  vector<int> Neighbor;
 typedef  vector<int> Core;
 
@@ -19,7 +18,7 @@ class Edge{
 };
 class Vertex{
     public:
-        int attribute_;
+        vector<int> attribute_;
 };
 class XYEdge{
     public:
@@ -70,5 +69,6 @@ Graph ExtractSubgraph(Graph g,vector<int> need);
 Graph InputGraphWithAddColor();
 void OutputGraph(Graph graph);
 long long EdgeId(int u, int v);
+bool EdgeCmp(Edge e1, Edge e2);
 #endif //Communtity_GRAPH_H
 

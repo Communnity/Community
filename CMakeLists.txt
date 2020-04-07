@@ -1,16 +1,28 @@
-cmake_minimum_required(VERSION 3.13)
-project(Communtity)
+cmake_minimum_required(VERSION 3.16)
+project(Community)
 
-set(CMAKE_CXX_STANDARD 11)
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
-find_package(GTest REQUIRED)
-find_package(Threads REQUIRED)
+set(CMAKE_CXX_STANDARD 14)
 
-include_directories(${GTEST_INCLUDE_DIRS})
-add_executable(MyTests test.cpp test.h)
-target_link_libraries(MyTests ${GTEST_BOTH_LIBRARIES})
-target_link_libraries(MyTests ${CMAKE_THREAD_LIBS_INIT})
-add_test(Test MyTests)
-enable_testing()
+include_directories(.)
 
-add_executable(Communtity main.cpp core.cpp core.h include.cpp include.h graph.cpp graph.h condition.cpp condition.h file_manage.cpp file_manage.h truss.cpp truss.h ks_core.cpp ks_core.h ego_community.cpp ego_community.h)
+add_executable(Community
+    clique.cpp
+    clique.h
+    condition.cpp
+    condition.h
+    core.cpp
+    core.h
+    ego_community.cpp
+    ego_community.h
+    file_manage.cpp
+    file_manage.h
+    graph.cpp
+    graph.h
+    include.cpp
+    include.h
+    ks_core.cpp
+    ks_core.h
+    main.cpp
+    README.md
+        truss.cpp
+    truss.h)

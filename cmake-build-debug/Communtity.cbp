@@ -136,6 +136,12 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/gjy/CLionProjects/Community/clique.cpp">
+			<Option target="Communtity"/>
+		</Unit>
+		<Unit filename="/Users/gjy/CLionProjects/Community/clique.h">
+			<Option target="Communtity"/>
+		</Unit>
 		<Unit filename="/Users/gjy/CLionProjects/Community/condition.cpp">
 			<Option target="Communtity"/>
 		</Unit>

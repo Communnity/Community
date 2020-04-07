@@ -173,48 +173,48 @@ bool CheckCoresDelLine(Graph graph, CoreDelLine cores_del_line){
 
     return true;
 }
-
-Cores FindLeastColorCores(Graph graph, NeedColorList need_color_vertex_list, CoreDelLine cores_del_line){
-
-    int n = graph.n_;
-    int m = graph.m_;
-    Cores cores;
-    cores.k_ = 0;
-    int max_attribute = 0;
-
-    for(int v = 0; v < n; v++) max_attribute = max(max_attribute, graph.vertex_[v].attribute_);
-    vector<int> color(max_attribute),need_color_vertex(max_attribute),vertex_delete(n);
-
-    for(int v = 0; v < n; v++) color[graph.vertex_[v].attribute_]++;
-    for(int i = 0;i < need_color_vertex_list.size(); i++){
-        need_color_vertex[need_color_vertex_list[i].id_] += need_color_vertex_list[i].number_;
-    }
-    for(int i = 0; i < max_attribute;i++) if(color[i] < need_color_vertex[i]){
-        return cores;
-    }
-
-
-    for(int i = 0; i < cores_del_line.size()-1;i++){
-
-        for(int j = 0; j  < cores_del_line[i].del_vertex_.size(); j++){
-            int v = cores_del_line[i].del_vertex_[j];
-            color[graph.vertex_[v].attribute_]--;
-            if(color[graph.vertex_[v].attribute_] < need_color_vertex[graph.vertex_[v].attribute_]){
-                cores.k_ = cores_del_line[i].k_;
-                for(int i = 0; i < n; ++i) if(vertex_delete[i] == 0)
-                    cores.vertex_.push_back(i);
-                return cores;
-            }
-        }
-        for(int j = 0; j  < cores_del_line[i].del_vertex_.size(); j++) {
-            int v = cores_del_line[i].del_vertex_[j];
-            vertex_delete[v] = 1;
-        }
-    }
-    cores.k_ = cores_del_line[cores_del_line.size()-1].k_;
-    for(int i = 0; i < n; ++i) if(vertex_delete[i] == 0)
-            cores.vertex_.push_back(i);
-    return cores;
-}
-
-
+//
+//Cores FindLeastColorCores(Graph graph, NeedColorList need_color_vertex_list, CoreDelLine cores_del_line){
+//
+//    int n = graph.n_;
+//    int m = graph.m_;
+//    Cores cores;
+//    cores.k_ = 0;
+//    int max_attribute = 0;
+//
+//    for(int v = 0; v < n; v++) max_attribute = max(max_attribute, graph.vertex_[v].attribute_);
+//    vector<int> color(max_attribute + 1),need_color_vertex(max_attribute + 1),vertex_delete(n);
+//
+//    for(int v = 0; v < n; v++) color[graph.vertex_[v].attribute_]++;
+//    for(int i = 0;i < need_color_vertex_list.size(); i++){
+//        need_color_vertex[need_color_vertex_list[i].id_] += need_color_vertex_list[i].number_;
+//    }
+//    for(int i = 0; i < max_attribute;i++) if(color[i] < need_color_vertex[i]){
+//        return cores;
+//    }
+//
+//
+//    for(int i = 0; i < cores_del_line.size()-1;i++){
+//
+//        for(int j = 0; j  < cores_del_line[i].del_vertex_.size(); j++){
+//            int v = cores_del_line[i].del_vertex_[j];
+//            color[graph.vertex_[v].attribute_]--;
+//            if(color[graph.vertex_[v].attribute_] < need_color_vertex[graph.vertex_[v].attribute_]){
+//                cores.k_ = cores_del_line[i].k_;
+//                for(int i = 0; i < n; ++i) if(vertex_delete[i] == 0)
+//                    cores.vertex_.push_back(i);
+//                return cores;
+//            }
+//        }
+//        for(int j = 0; j  < cores_del_line[i].del_vertex_.size(); j++) {
+//            int v = cores_del_line[i].del_vertex_[j];
+//            vertex_delete[v] = 1;
+//        }
+//    }
+//    cores.k_ = cores_del_line[cores_del_line.size()-1].k_;
+//    for(int i = 0; i < n; ++i) if(vertex_delete[i] == 0)
+//            cores.vertex_.push_back(i);
+//    return cores;
+//}
+//
+//

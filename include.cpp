@@ -22,6 +22,14 @@ char* StrToChar(string str){
 int ran(int md){
     return rand() % md + 1;
 }
+void InputNodeToString(map<int, string> &author_map){
+    ifstream fin;
+    fin.open("/Users/gjy/Documents/社交网络与图论论文/dataset/small/author_name.txt");
+    int author_id, author_name;
+    while(fin>>author_id>>author_name){
+        author_map[author_id] = author_name;
+    }
+}
 void ReidGraph() {
     FILE *out_fp = fopen("/Users/gjy/Documents/社交网络与图论论文/dataset/facebook/facebook-combined-reid.txt", "w");
     int n, m;

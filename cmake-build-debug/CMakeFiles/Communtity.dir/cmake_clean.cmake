@@ -8,6 +8,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/Communtity.dir/truss.cpp.o"
   "CMakeFiles/Communtity.dir/ks_core.cpp.o"
   "CMakeFiles/Communtity.dir/ego_community.cpp.o"
+  "CMakeFiles/Communtity.dir/clique.cpp.o"
   "Communtity.pdb"
   "Communtity"
 )
