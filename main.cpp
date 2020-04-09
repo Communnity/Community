@@ -157,7 +157,6 @@ int main() {
 
     Query query(graph.n_);
     query.Search(graph, 0);
-
     finish = clock();//初始化结束时间
     double duration = (double)(finish - start) / CLOCKS_PER_SEC;//转换浮点型
     printf( "TestDataset %lf seconds\n", duration );
