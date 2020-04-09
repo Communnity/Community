@@ -7,6 +7,8 @@
 #include "file_manage.h"
 #include "ego_community.h"
 #include "clique.h"
+#include "tree.h"
+#include "graph_algorithm.h"
 void TestDataset(Graph &graph){
 
     clock_t start,finish; //定义开始，结束变量
@@ -146,16 +148,19 @@ void CompareTrussandEgocore(){
 int main() {
     srand(time(NULL));
 
- 
+
     Graph graph;
-    graph.InputGraph();
+    graph.InputGraphWithAttribute();
+
     clock_t start,finish; //定义开始，结束变量
     start = clock();//初始化
-    TestDataset(graph);
+
+    Query query(graph.n_);
+    query.Search(graph, 0);
+
     finish = clock();//初始化结束时间
     double duration = (double)(finish - start) / CLOCKS_PER_SEC;//转换浮点型
     printf( "TestDataset %lf seconds\n", duration );
-
-
+    query.Output();
     return 0;
 }

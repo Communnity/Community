@@ -36,12 +36,13 @@ class Graph{
     public:
         int n_;
         int m_;
+        int max_attribute_;
         vector<vector<Edge> > edge_;
         vector<Vertex> vertex_;
         unordered_map<long long, int> exist_edge_;
         unordered_map<int, int> exist_vertex_;
         void Init();
-        Graph(int n, int m);
+        Graph(int n);
         Graph();
         bool Empty();
         void InputGraph();
@@ -63,6 +64,19 @@ class EgoGraph:public Graph{
     public:
         int ego;
 };
+class BiGraph{
+ public:
+  int leftn_, rightn_, dis_;
+  vector<int> mx_, my_, dx_, dy_;
+  vector<bool> vst_;
+  vector<vector<int> > edge_;
+  int MaxMatch();
+  bool DFS(int u);
+  bool SearchP();
+  BiGraph(int n1, int n2);
+};
+
+
 
 Graph ExtractSubgraph(Graph g,vector<int> need);
 

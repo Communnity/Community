@@ -141,14 +141,14 @@ void Graph:: InputGraph(){
     cout << "Finish "<<__FUNCTION__<<endl;
 }
 void Graph:: InputGraphWithAttribute(){
+    freopen("/Users/gjy/CLionProjects/Community/cmake-build-debug/input.in", "r", stdin);
     read(this->n_); read(this->m_);
     this->Init();
 
 
-    for(int i = 0; i < this->m_; ++i){
-        int x,y;
-        double w1,w2;
-        read(x);read(y);//scanf("%f %f",&w1,&w2);
+    for(int i = 0; i < this->m_; ++i) {
+        int x, y;
+        read(x);read(y);
         x--;y--;//[0,N)
         //cout<<x<<" "<<y<<" "<<w1<<" "<<w2<<endl;
         this->edge_[x].push_back(Edge(y,0));
@@ -162,8 +162,16 @@ void Graph:: InputGraphWithAttribute(){
             this->exist_edge_[EdgeId(u, v)] = 1;
         }
     }
+
+    read(this->max_attribute_);
     for(int i = 0; i < this->n_; ++i){
-        scanf("%d", &this->vertex_[i].attribute_);
+        int k; read(k);
+        for (int j = 0; j < k; ++j) {
+            int attribute = -1;
+            read(attribute);
+            this->vertex_[i].attribute_.push_back(attribute);
+        }
+
     }
     cout << "Finish "<<__FUNCTION__<<endl;
 }
@@ -271,9 +279,8 @@ void OutputGraph(Graph graph, string file_str){
 Graph::Graph(void) {
 
 }
-Graph::Graph(int n, int m){
+Graph::Graph(int n){
     this->n_ = n;
-    this->m_ = m;
     for(int i =0 ; i < this->n_; ++i){
         Vertex vertex;
         vertex_.push_back(vertex);
@@ -316,4 +323,95 @@ Graph ExtractSubgraph(Graph graph, vector<int> need){
 
     //return graph
     return sub_graph;
+}
+
+
+BiGraph :: BiGraph(int n1, int n2) {
+    edge_  = vector<vector<int> > (n1);
+    leftn_ = n1;
+    rightn_ = n2;
+}
+bool BiGraph::SearchP()
+{
+    queue<int> Q;
+    dis_ = INF;
+    dx_ = vector<int>(leftn_, -1);
+    dy_ = vector<int>(rightn_, -1);
+    // 使用BFS遍历对图的点进行分层，从X中找出一个未匹配点v
+    // (所有v)组成第一层，接下来的层都是这样形成——每次查找
+    // 匹配点(增广路性质)，直到在Y中找到未匹配点才停止查找，
+    // 对X其他未匹配点同样进行查找增广路径(BFS只分层不标记
+    // 是否匹配点)
+    // 找出X中的所有未匹配点组成BFS的第一层
+    for (int i = 0; i < mx_.size(); ++i) {
+        if (mx_[i] == -1) {
+            Q.push(i);
+            dx_[i] = 0;
+        }
+    }
+    while (!Q.empty()) {
+        int u = Q.front();
+        Q.pop();
+        // 该路径长度大于dis，等待下一次BFS扩充
+        // dis是到Y集合的长度，所以dis一定是一个奇数
+        if (dx_[u] > dis_) break;
+        for (auto v : this->edge_[u]) {
+            // (u,v)之间有边且v还没有分层
+            // 分配v的层次
+            if (dy_[v] == -1)
+            {
+                dy_[v] = dx_[u] + 1;
+                // v是未匹配\\\\\\\\\点，停止延伸（查找）
+                // 得到本次BFS的最大遍历层次
+                if (my_[v] == -1) dis_ = dy_[v];
+                    // v是匹配点，继续延伸
+                else
+                {
+                    dx_[my_[v]] = dy_[v] + 1;
+                    Q.push(my_[v]);
+                }
+            }
+        }
+    }
+    // 若dis为INF说明Y中没有未匹配点，也就是没有增广路径了
+    return dis_ != INF;
+}
+
+// 用DFS遍历查找BFS形成的增广路，如果可以找到增广路就停止遍历并返回true
+bool BiGraph::DFS(int u) {
+    for (auto v: this->edge_[u]) {
+        if (!vst_[v] && dy_[v] == dx_[u] + 1) {
+            vst_[v] = 1;
+            // 层次（也就是增广路径的长度）大于本次查找的dis
+            // 是searchP中被break的情况，也就是还不确定是否是增广路
+            // 只有等再次调用searchP再判断
+            if (my_[v] != -1 && dy_[v] == dis_) continue;
+            // 是增广路径，更新匹配集
+            if (my_[v] == -1 || DFS(my_[v])) {
+                my_[v] = u;
+                mx_[u] = v;
+                return true;
+            }
+        }
+    }
+    return false;
+}
+
+// 查找二分图的最大匹配
+int BiGraph::MaxMatch() {
+    int res = 0;
+    // 每个结点的匹配顶点置空
+    mx_ = vector<int>(leftn_, -1);
+    my_ = vector<int>(rightn_, -1);
+    // 如果BFS可以找到增广路径
+    while (SearchP()) {
+        vst_ = vector<bool>(rightn_, 0);
+        for (int i = 0; i < leftn_; ++i) {
+            // 用DFS查找增广路径，增广路径一定从未匹配点开始
+            // 如果查找到一个增广路径，匹配数加一
+            if (mx_[i] == -1 && DFS(i))
+                ++res;
+        }
+    }
+    return res;
 }

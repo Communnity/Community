@@ -10,9 +10,11 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/Users/gjy/CLionProjects/Community/ego_community.cpp" "/Users/gjy/CLionProjects/Community/cmake-build-debug/CMakeFiles/Community.dir/ego_community.cpp.o"
   "/Users/gjy/CLionProjects/Community/file_manage.cpp" "/Users/gjy/CLionProjects/Community/cmake-build-debug/CMakeFiles/Community.dir/file_manage.cpp.o"
   "/Users/gjy/CLionProjects/Community/graph.cpp" "/Users/gjy/CLionProjects/Community/cmake-build-debug/CMakeFiles/Community.dir/graph.cpp.o"
+  "/Users/gjy/CLionProjects/Community/graph_algorithm.cpp" "/Users/gjy/CLionProjects/Community/cmake-build-debug/CMakeFiles/Community.dir/graph_algorithm.cpp.o"
   "/Users/gjy/CLionProjects/Community/include.cpp" "/Users/gjy/CLionProjects/Community/cmake-build-debug/CMakeFiles/Community.dir/include.cpp.o"
   "/Users/gjy/CLionProjects/Community/ks_core.cpp" "/Users/gjy/CLionProjects/Community/cmake-build-debug/CMakeFiles/Community.dir/ks_core.cpp.o"
   "/Users/gjy/CLionProjects/Community/main.cpp" "/Users/gjy/CLionProjects/Community/cmake-build-debug/CMakeFiles/Community.dir/main.cpp.o"
+  "/Users/gjy/CLionProjects/Community/tree.cpp" "/Users/gjy/CLionProjects/Community/cmake-build-debug/CMakeFiles/Community.dir/tree.cpp.o"
   "/Users/gjy/CLionProjects/Community/truss.cpp" "/Users/gjy/CLionProjects/Community/cmake-build-debug/CMakeFiles/Community.dir/truss.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")

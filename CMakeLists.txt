@@ -25,4 +25,4 @@ add_executable(Community
     main.cpp
     README.md
         truss.cpp
-    truss.h)
+    truss.h tree.cpp tree.h graph_algorithm.cpp graph_algorithm.h)

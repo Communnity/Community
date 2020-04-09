@@ -285,6 +285,33 @@ graph.cpp.s:
 	$(MAKE) -f CMakeFiles/Community.dir/build.make CMakeFiles/Community.dir/graph.cpp.s
 .PHONY : graph.cpp.s
 
+graph_algorithm.o: graph_algorithm.cpp.o
+
+.PHONY : graph_algorithm.o
+
+# target to build an object file
+graph_algorithm.cpp.o:
+	$(MAKE) -f CMakeFiles/Community.dir/build.make CMakeFiles/Community.dir/graph_algorithm.cpp.o
+.PHONY : graph_algorithm.cpp.o
+
+graph_algorithm.i: graph_algorithm.cpp.i
+
+.PHONY : graph_algorithm.i
+
+# target to preprocess a source file
+graph_algorithm.cpp.i:
+	$(MAKE) -f CMakeFiles/Community.dir/build.make CMakeFiles/Community.dir/graph_algorithm.cpp.i
+.PHONY : graph_algorithm.cpp.i
+
+graph_algorithm.s: graph_algorithm.cpp.s
+
+.PHONY : graph_algorithm.s
+
+# target to generate assembly for a file
+graph_algorithm.cpp.s:
+	$(MAKE) -f CMakeFiles/Community.dir/build.make CMakeFiles/Community.dir/graph_algorithm.cpp.s
+.PHONY : graph_algorithm.cpp.s
+
 include.o: include.cpp.o
 
 .PHONY : include.o
@@ -366,6 +393,33 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/Community.dir/build.make CMakeFiles/Community.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+tree.o: tree.cpp.o
+
+.PHONY : tree.o
+
+# target to build an object file
+tree.cpp.o:
+	$(MAKE) -f CMakeFiles/Community.dir/build.make CMakeFiles/Community.dir/tree.cpp.o
+.PHONY : tree.cpp.o
+
+tree.i: tree.cpp.i
+
+.PHONY : tree.i
+
+# target to preprocess a source file
+tree.cpp.i:
+	$(MAKE) -f CMakeFiles/Community.dir/build.make CMakeFiles/Community.dir/tree.cpp.i
+.PHONY : tree.cpp.i
+
+tree.s: tree.cpp.s
+
+.PHONY : tree.s
+
+# target to generate assembly for a file
+tree.cpp.s:
+	$(MAKE) -f CMakeFiles/Community.dir/build.make CMakeFiles/Community.dir/tree.cpp.s
+.PHONY : tree.cpp.s
+
 truss.o: truss.cpp.o
 
 .PHONY : truss.o
@@ -420,6 +474,9 @@ help:
 	@echo "... graph.o"
 	@echo "... graph.i"
 	@echo "... graph.s"
+	@echo "... graph_algorithm.o"
+	@echo "... graph_algorithm.i"
+	@echo "... graph_algorithm.s"
 	@echo "... include.o"
 	@echo "... include.i"
 	@echo "... include.s"
@@ -429,6 +486,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... tree.o"
+	@echo "... tree.i"
+	@echo "... tree.s"
 	@echo "... truss.o"
 	@echo "... truss.i"
 	@echo "... truss.s"

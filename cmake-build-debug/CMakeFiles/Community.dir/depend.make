@@ -31,6 +31,11 @@ CMakeFiles/Community.dir/graph.cpp.o: ../graph.cpp
 CMakeFiles/Community.dir/graph.cpp.o: ../graph.h
 CMakeFiles/Community.dir/graph.cpp.o: ../include.h
 
+CMakeFiles/Community.dir/graph_algorithm.cpp.o: ../graph.h
+CMakeFiles/Community.dir/graph_algorithm.cpp.o: ../graph_algorithm.cpp
+CMakeFiles/Community.dir/graph_algorithm.cpp.o: ../graph_algorithm.h
+CMakeFiles/Community.dir/graph_algorithm.cpp.o: ../include.h
+
 CMakeFiles/Community.dir/include.cpp.o: ../include.cpp
 CMakeFiles/Community.dir/include.cpp.o: ../include.h
 
@@ -39,16 +44,24 @@ CMakeFiles/Community.dir/ks_core.cpp.o: ../include.h
 CMakeFiles/Community.dir/ks_core.cpp.o: ../ks_core.cpp
 CMakeFiles/Community.dir/ks_core.cpp.o: ../ks_core.h
 
+CMakeFiles/Community.dir/main.cpp.o: ../Graph.h
 CMakeFiles/Community.dir/main.cpp.o: ../clique.h
 CMakeFiles/Community.dir/main.cpp.o: ../condition.h
 CMakeFiles/Community.dir/main.cpp.o: ../core.h
 CMakeFiles/Community.dir/main.cpp.o: ../ego_community.h
 CMakeFiles/Community.dir/main.cpp.o: ../file_manage.h
 CMakeFiles/Community.dir/main.cpp.o: ../graph.h
+CMakeFiles/Community.dir/main.cpp.o: ../graph_algorithm.h
 CMakeFiles/Community.dir/main.cpp.o: ../include.h
 CMakeFiles/Community.dir/main.cpp.o: ../ks_core.h
 CMakeFiles/Community.dir/main.cpp.o: ../main.cpp
+CMakeFiles/Community.dir/main.cpp.o: ../tree.h
 CMakeFiles/Community.dir/main.cpp.o: ../truss.h
+
+CMakeFiles/Community.dir/tree.cpp.o: ../Graph.h
+CMakeFiles/Community.dir/tree.cpp.o: ../include.h
+CMakeFiles/Community.dir/tree.cpp.o: ../tree.cpp
+CMakeFiles/Community.dir/tree.cpp.o: ../tree.h
 
 CMakeFiles/Community.dir/truss.cpp.o: ../graph.h
 CMakeFiles/Community.dir/truss.cpp.o: ../include.h

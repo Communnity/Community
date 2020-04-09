@@ -121,6 +121,12 @@
 		<Unit filename="/Users/gjy/CLionProjects/Community/graph.h">
 			<Option target="Community"/>
 		</Unit>
+		<Unit filename="/Users/gjy/CLionProjects/Community/graph_algorithm.cpp">
+			<Option target="Community"/>
+		</Unit>
+		<Unit filename="/Users/gjy/CLionProjects/Community/graph_algorithm.h">
+			<Option target="Community"/>
+		</Unit>
 		<Unit filename="/Users/gjy/CLionProjects/Community/include.cpp">
 			<Option target="Community"/>
 		</Unit>
@@ -134,6 +140,12 @@
 			<Option target="Community"/>
 		</Unit>
 		<Unit filename="/Users/gjy/CLionProjects/Community/main.cpp">
+			<Option target="Community"/>
+		</Unit>
+		<Unit filename="/Users/gjy/CLionProjects/Community/tree.cpp">
+			<Option target="Community"/>
+		</Unit>
+		<Unit filename="/Users/gjy/CLionProjects/Community/tree.h">
 			<Option target="Community"/>
 		</Unit>
 		<Unit filename="/Users/gjy/CLionProjects/Community/truss.cpp">

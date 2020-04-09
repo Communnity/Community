@@ -31,6 +31,11 @@ CMakeFiles/Community.dir/graph.cpp.o
  /Users/gjy/CLionProjects/Community/graph.cpp
  /Users/gjy/CLionProjects/Community/graph.h
  /Users/gjy/CLionProjects/Community/include.h
+CMakeFiles/Community.dir/graph_algorithm.cpp.o
+ /Users/gjy/CLionProjects/Community/graph.h
+ /Users/gjy/CLionProjects/Community/graph_algorithm.cpp
+ /Users/gjy/CLionProjects/Community/graph_algorithm.h
+ /Users/gjy/CLionProjects/Community/include.h
 CMakeFiles/Community.dir/include.cpp.o
  /Users/gjy/CLionProjects/Community/include.cpp
  /Users/gjy/CLionProjects/Community/include.h
@@ -40,16 +45,24 @@ CMakeFiles/Community.dir/ks_core.cpp.o
  /Users/gjy/CLionProjects/Community/ks_core.cpp
  /Users/gjy/CLionProjects/Community/ks_core.h
 CMakeFiles/Community.dir/main.cpp.o
+ /Users/gjy/CLionProjects/Community/Graph.h
  /Users/gjy/CLionProjects/Community/clique.h
  /Users/gjy/CLionProjects/Community/condition.h
  /Users/gjy/CLionProjects/Community/core.h
  /Users/gjy/CLionProjects/Community/ego_community.h
  /Users/gjy/CLionProjects/Community/file_manage.h
  /Users/gjy/CLionProjects/Community/graph.h
+ /Users/gjy/CLionProjects/Community/graph_algorithm.h
  /Users/gjy/CLionProjects/Community/include.h
  /Users/gjy/CLionProjects/Community/ks_core.h
  /Users/gjy/CLionProjects/Community/main.cpp
+ /Users/gjy/CLionProjects/Community/tree.h
  /Users/gjy/CLionProjects/Community/truss.h
+CMakeFiles/Community.dir/tree.cpp.o
+ /Users/gjy/CLionProjects/Community/Graph.h
+ /Users/gjy/CLionProjects/Community/include.h
+ /Users/gjy/CLionProjects/Community/tree.cpp
+ /Users/gjy/CLionProjects/Community/tree.h
 CMakeFiles/Community.dir/truss.cpp.o
  /Users/gjy/CLionProjects/Community/graph.h
  /Users/gjy/CLionProjects/Community/include.h
