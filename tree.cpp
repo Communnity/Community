@@ -15,7 +15,7 @@ void Tree::BuildTree(const Graph &graph, vector<bool> &used, int x) {
     this->vertex_[x].attribute_.push_back(attribute);
   }
   for (auto y : graph.edge_[x]){
-    if (used[y.point_]) continue;
+    if (used[y]) continue;
     this->son_[x].push_back(y);
   }
 }

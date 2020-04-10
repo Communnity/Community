@@ -7,10 +7,11 @@
 #include "graph.h"
 class Query {
  public:
-  int query_maxsize_;
+  int query_maxsize_, query_sum_;
   int find_core_k_;
   vector<int> search_core_, find_core_;
   vector<int> choose_;
+  vector<int> id_;
   vector<tuple<int, int>> queries;
   Query(int n);
   void Search(const Graph &graph, int x);

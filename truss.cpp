@@ -20,8 +20,8 @@ Graph BuildTruss(Truss_sup truss_sup, int truss_k){
         if(sup < truss_k) continue;
 
         truss.exist_vertex_[u]  = truss.exist_vertex_[v] = 1;
-        truss.edge_[u].push_back(Edge(v,0));
-        truss.edge_[v].push_back(Edge(u,0));
+        truss.edge_[u].push_back(v);
+        truss.edge_[v].push_back(u);
         truss.exist_edge_[EdgeId(u,v)] = 1;
 
         truss.m_++;
@@ -42,7 +42,7 @@ Truss_sup ComputerSup(Graph graph){
 
     for(int v = 0; v < graph.n_; v++){
         for(auto edge_v:graph.edge_[v]) {
-            int u = edge_v.point_;
+            int u = edge_v;
             if(v > u) continue;// (v,u) and (u,v) only count once
             SupEdge sup_edge(v, u, 0);
             //cout << sup_edge.v_<< " " << sup_edge.u_<<endl;
@@ -53,7 +53,7 @@ Truss_sup ComputerSup(Graph graph){
        int triangle_v = sup_edge.v_, triangle_u = sup_edge.u_;
        if(deg[triangle_u] > deg[triangle_v]) swap(triangle_v,triangle_u);
        for(auto edge_triangle_u:graph.edge_[triangle_u]){
-            int triangle_w = edge_triangle_u.point_;
+            int triangle_w = edge_triangle_u;
             if(graph.exist_edge_.find(EdgeId(triangle_v, triangle_w)) != graph.exist_edge_.end()) {
                 sup_edge.sup_+=1;
             }
@@ -140,7 +140,7 @@ Truss_sup FindTruss(Graph graph){
         assert(deg[v] > 0);
         assert(deg[u] > 0);
         for(auto edge_v:graph.edge_[v]){
-            int w = edge_v.point_;
+            int w = edge_v;
             if(w == u) continue;
             if(exist_edge.find(EdgeId(v,w)) == exist_edge.end()) continue;
             if(exist_edge.find(EdgeId(u,w)) == exist_edge.end()) continue;// exist v,u,w triangle

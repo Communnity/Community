@@ -82,7 +82,7 @@ void SingleEgoCoreInit(Graph &graph, int ego, CoreGraph &core, CoreBucket &core_
     core.k_ = INF;
     core.n_ = 0;
     for (auto edge_v:graph.edge_[ego]) {
-        int u = edge_v.point_;
+        int u = edge_v;
 
         int deg_u = graph.NeighborTwoVertex(u, ego).size();
         core.vertex_.push_back(u);
@@ -229,7 +229,7 @@ EgoCoreDelLine EgoCore(Graph graph){
 
             assert(graph.exist_vertex_[v] == 1);
             for(auto edge_v:graph.edge_[v]) {
-                int u = edge_v.point_;
+                int u = edge_v;
 
                 if(graph.exist_edge_[EdgeId(u, v)] == 0){
 #ifdef DEBUG_ASSERT
@@ -275,7 +275,7 @@ EgoCoreDelLine EgoCoreFast(Graph graph){
 
         core_k.push_back(INF);
         for(auto edge_ego:graph.edge_[ego]){
-            int u = edge_ego.point_;
+            int u = edge_ego;
             Neighbor neighbor_u_v = graph.NeighborTwoVertex(u, ego);
             ego_vertex_vec.push_back(EgoVertex(u, ego));
             deg.push_back(neighbor_u_v.size());
@@ -365,7 +365,7 @@ EgoCoreDelLine EgoCoreFast(Graph graph){
 
           // assert(graph.exist_vertex_[ego] == 1);
             for(auto edge_ego:graph.edge_[ego]) {
-                int ori_u = edge_ego.point_;
+                int ori_u = edge_ego;
 
                 if(graph.exist_edge_[EdgeId(ego, ori_u)] == 0){
 #ifdef DEBUG_ASSERT

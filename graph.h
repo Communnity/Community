@@ -10,12 +10,12 @@
 typedef  vector<int> Neighbor;
 typedef  vector<int> Core;
 
-class Edge{
-    public:
-        int point_;
-        int weight_;
-        Edge(int point,int weight){point_ = point; weight_ = weight;};
-};
+//class Edge{
+//    public:
+//        int point_;
+//        int weight_;
+//        Edge(int point,int weight){point_ = point; weight_ = weight;};
+//};
 class Vertex{
     public:
         vector<int> attribute_;
@@ -37,7 +37,7 @@ class Graph{
         int n_;
         int m_;
         int max_attribute_;
-        vector<vector<Edge> > edge_;
+        vector<vector<int> > edge_;
         vector<Vertex> vertex_;
         unordered_map<long long, int> exist_edge_;
         unordered_map<int, int> exist_vertex_;
@@ -83,6 +83,6 @@ Graph ExtractSubgraph(Graph g,vector<int> need);
 Graph InputGraphWithAddColor();
 void OutputGraph(Graph graph);
 long long EdgeId(int u, int v);
-bool EdgeCmp(Edge e1, Edge e2);
+//bool EdgeCmp(Edge e1, Edge e2);
 #endif //Communtity_GRAPH_H
 

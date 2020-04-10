@@ -10,7 +10,7 @@ class Tree {
  public:
   int root_, n_, max_attribute_;
   vector<Vertex> vertex_;
-  vector<vector<Edge>> son_;
+  vector<vector<int>> son_;
   vector<tuple<int, int> > base_;
   Tree(int n);
   void BuildTree(const Graph &graph, vector<bool> &used, int x);

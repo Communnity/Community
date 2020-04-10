@@ -9,12 +9,14 @@ bool Query::FindMatch(BiGraph &bigraph) {
 }
 bool Query::Check(const Graph &graph) {
 
-  int n1 = this->search_core_.size(), n2 = 0;
+  int n1 = this->search_core_.size();
+  if (n1 < this->query_sum_) return false;
+  int n2 = 0;
   int search_core_k = 1e9;
   for (auto x : this->search_core_) {
     int cnt = 0;
     for (auto edge : graph.edge_[x]) {
-      int y = edge.point_;
+      int y = edge;
       if (this->choose_[y]) ++cnt;
     }
     search_core_k = min(search_core_k, cnt);
@@ -52,7 +54,7 @@ bool Query::Check(const Graph &graph) {
     find_core_k_ = search_core_k;
 
     this->find_core_.clear();
-    for (auto x :  this->search_core_) this->find_core_.push_back(x);
+    for (auto x :  this->search_core_) this->find_core_.push_back(this->id_[x]);
     return true;
   } else {
     return false;
@@ -66,11 +68,13 @@ Query::Query(int n) {
   find_core_k_ = -1;
   freopen("/Users/gjy/CLionProjects/Community/cmake-build-debug/query.in", "r", stdin);
   int nq;
+  query_sum_ = 0;
   read(nq);read(query_maxsize_);
   for (int i = 1; i <= nq; ++i) {
     int attribute, number;
     read(attribute); read(number);
     this->queries.push_back(make_tuple(attribute, number));
+    query_sum_ += number;
   }
 }
 
@@ -85,12 +89,13 @@ void Query::Search(const Graph &graph, int x) {
   }
 
 
-  int cnt = 0;
+  int cnt = 0, connected = 0;
   for (int i = 0; i < graph.edge_[x].size(); ++i) {
-    if (this->choose_[graph.edge_[x][i].point_]) cnt++;
-    else if (graph.edge_[x][i].point_ > x) cnt++;
+    if (this->choose_[graph.edge_[x][i]]) cnt++;
+    else if (graph.edge_[x][i] > x) cnt++;
+    if (this->choose_[graph.edge_[x][i]]) connected = 1;
   }
-  if (!(cnt + 1 < this->find_core_k_ || (cnt + 1 == this->find_core_k_ && search_core_.size() >= this->find_core_.size()))) {
+  if (connected && !(cnt < this->find_core_k_ || (cnt  == this->find_core_k_ && search_core_.size() >= this->find_core_.size()))) {
     this->choose_[x] = 1;
     this->search_core_.push_back(x);
     Search(graph, x + 1);

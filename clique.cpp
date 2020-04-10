@@ -74,7 +74,7 @@ void BasicMCE(Graph &graph, vector<int> P, vector<int> R, vector<int> X, int &mc
 
     for(auto v:SetOr(P, X)){
         vector<int> neighbor_v;
-        for(auto edge_v:graph.edge_[v]) neighbor_v.push_back(edge_v.point_);
+        for(auto edge_v:graph.edge_[v]) neighbor_v.push_back(edge_v);
         if(int(SetAnd(P, neighbor_v).size()) > u_prior){ // emmmmm?not int size() will wrong?
             u_prior = SetAnd(P, neighbor_v).size();
             u = v;
@@ -82,11 +82,11 @@ void BasicMCE(Graph &graph, vector<int> P, vector<int> R, vector<int> X, int &mc
     }
     assert(u > -1);
     vector<int> neighbor_u;
-    for(auto edge_u:graph.edge_[u]) neighbor_u.push_back(edge_u.point_);
+    for(auto edge_u:graph.edge_[u]) neighbor_u.push_back(edge_u);
 
     for(auto v:SetSub(P,neighbor_u)){
         vector<int> neighbor_v;
-        for(auto edge_v:graph.edge_[v]) neighbor_v.push_back(edge_v.point_);
+        for(auto edge_v:graph.edge_[v]) neighbor_v.push_back(edge_v);
         vector<int> set_v;set_v.push_back(v);
         BasicMCE(graph, SetAnd(P, neighbor_v), SetOr(R, set_v),SetAnd(X,neighbor_v), mc_size);
         P = SetSub(P, set_v);
@@ -121,7 +121,7 @@ void Clique(Graph &graph){
         int independent_u = 1, size = 2 * neighbor_u.size();
         for(auto v:neighbor_u)
             for(auto edge_v:graph.edge_[v]) {
-                int w = edge_v.point_;
+                int w = edge_v;
                 if(w == u) continue;
                 if(graph.exist_edge_.find(EdgeId(u, w)) == graph.exist_edge_.end())
                     size += 2;

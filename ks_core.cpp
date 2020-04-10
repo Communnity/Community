@@ -11,7 +11,7 @@ int FindMinKSDegreeVertex(Graph &graph, int para_k, int para_s){
         int deg_u = 0;
 
         for(auto edge_u:graph.edge_[u]) {
-            int v = edge_u.point_;
+            int v = edge_u;
             if(!graph.exist_vertex_[v]) continue;
 //           // cout << u <<" "<<v<<" "<<graph.exist_edge_[EdgeId(u, v)]<<endl;
             if(!graph.exist_edge_[EdgeId(u, v)]) continue;

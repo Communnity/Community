@@ -21,12 +21,12 @@ Graph BuildCorewithIndex(Graph graph, CoreDelLine core_del_line, int core_k){
 
     core.Init();//must to give n to init edge list;
     for(int u  = 0; u < graph.n_; u++) if(core.exist_vertex_[u]){
-        for(auto edge_u:graph.edge_[u]){
-            int v = edge_u.point_;
+        for(auto v:graph.edge_[u]){
+            //int v = edge_u.point_;
             if(core.exist_vertex_[v]){
                 if(v < u) continue;
-                core.edge_[u].push_back(Edge(v,0));
-                core.edge_[v].push_back(Edge(u,0));
+                core.edge_[u].push_back(v);
+                core.edge_[v].push_back(u);
                 assert(core.exist_edge_[EdgeId(u,v)] == 0);
                 core.exist_edge_[EdgeId(u,v)] = 1;
                 core.m_++;
@@ -105,9 +105,9 @@ CoreDelLine FindCore(Graph &graph){
         }else{
             core_del_line[core_del_line.size()-1].del_vertex_.push_back(v);
         }
-        vector<Edge> edge_v  = graph.edge_[v];
+        vector<int> edge_v  = graph.edge_[v];
         for(int i = 0; i < edge_v.size(); i++){
-            int u = edge_v[i].point_;
+            int u = edge_v[i];
 
             if(deg[u]>deg_v){
                 Modify(u,deg[u]-1,deg,bin,vert,pos);
@@ -163,7 +163,7 @@ bool CheckCoresDelLine(Graph graph, CoreDelLine cores_del_line){
             int v = cores_del_line[i].del_vertex_[j];
             deg[v] = - 1;
             for(int k  = 0; k < graph.edge_[v].size(); k++){
-                int u = graph.edge_[v][k].point_;
+                int u = graph.edge_[v][k];
                 deg[u]--;
             }
         }
