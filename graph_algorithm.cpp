@@ -3,6 +3,7 @@
 //
 
 #include "graph_algorithm.h"
+
 bool Query::FindMatch(BiGraph &bigraph) {
   if (bigraph.MaxMatch() == bigraph.leftn_) return true;
   return false;
@@ -66,6 +67,7 @@ bool Query::Check(const Graph &graph) {
 Query::Query(int n, string input_str) {
   this->choose_.resize(n);
   find_core_k_ = -1;
+  cost_ = 0;
   freopen(("../cmake-build-debug/" + input_str).c_str(), "r", stdin);
   int nq;
   query_sum_ = 0;
@@ -77,17 +79,38 @@ Query::Query(int n, string input_str) {
     query_sum_ += number;
   }
 }
-
+int Query::ExpectedKCore(const Graph &graph, int limit) {
+  if (this->search_core_.size() == 0) return -1;
+  int expected_core_k  = 1e9;
+  for (auto x : this->search_core_) {
+    int cnt = 0;
+    for (auto y : graph.edge_[x]) {
+      if (this->choose_[y]) ++cnt;
+      else if(y > limit) ++cnt;
+    }
+    expected_core_k = min(expected_core_k, cnt);
+  }
+  return expected_core_k;
+}
 void Query::Search(const Graph &graph, int x) {
+
+#ifdef Test
+  ++this->cost_;
+#endif
 
   if (x == graph.n_) return;
   if (this->search_core_.size() > this->query_maxsize_) {
     return;
   }
+//  cout << "check1" << endl;
+  if (this->ExpectedKCore(graph, x - 1) < this->find_core_k_) {
+    return;
+  }
+//  cout << "check3" << endl;
   if(this->Check(graph)) {
     return;
   }
-
+//  cout << "check2" << endl;
 
   int cnt = 0, connected = 0;
   for (int i = 0; i < graph.edge_[x].size(); ++i) {
@@ -110,6 +133,9 @@ void Query::Search(const Graph &graph, int x) {
 void Query::Output() {
   cout << "Find_Core_K="<<this->find_core_k_ << endl;
   for (auto x : this->find_core_) cout << x + 1<< " "; cout << endl;
+#ifdef Test
+  cout << "Search Core=" << this->cost_ << endl;
+#endif
 }
 
 Graph  Query:: ReidGraph(const Graph &graph, vector<int> & id , int st) {
@@ -124,18 +150,22 @@ Graph  Query:: ReidGraph(const Graph &graph, vector<int> & id , int st) {
     q.pop();
     for (auto y : graph.edge_[x]) {
       if (vis[y]) continue;
+      if (y < st) continue;
       vis[y] = 1;
       q.push(y);
       id[y] = ++id_now;
     }
   }
-  assert(id_now == graph.n_ - 1);
+
+ // assert(id_now + st == graph.n_ - 1); //从st出发走不到所有点的，在<st点删除情况下
   Graph reid_graph(graph.n_);
   reid_graph.max_attribute_ = graph.max_attribute_;
   for (int i = 0; i < graph.n_; ++i) {
+    if (id[i] == -1) continue;
     for (auto y : graph.vertex_[i].attribute_)
       reid_graph.vertex_[id[i]].attribute_.push_back(y);
     for (auto y : graph.edge_[i]) {
+      if (id[y] == -1) continue;
       reid_graph.edge_[id[i]].push_back(id[y]);
     }
   }
@@ -143,18 +173,23 @@ Graph  Query:: ReidGraph(const Graph &graph, vector<int> & id , int st) {
 }
 
 void Query::Start(const Graph &graph) {
+
 //    query.Search(graph, 0);
   for (int i = 0; i < graph.n_; ++i) {
-    vector<int> id(graph.n_);
+    vector<int> id(graph.n_, -1);
     Graph reid_graph = this->ReidGraph(graph, id, i);
     this->id_.resize(graph.n_);
-    for (auto x : id) {
+    for (int x = 0; x < id.size(); ++x) {
+      if (id[x] == -1) continue;
       this->id_[id[x]] = x;
     }
-    this->search_core_.push_back(0);
-    this->choose_[0] = 1;
-    this->Search(reid_graph, 1);
-    this->search_core_.pop_back();
-    this->choose_[0] = 0;
+
+    if ((int)reid_graph.edge_[0].size() >= find_core_k_) { //找到的k-core期望不小于原先的
+      this->search_core_.push_back(0);
+      this->choose_[0] = 1;
+      this->Search(reid_graph, 1);
+      this->search_core_.pop_back();
+      this->choose_[0] = 0;
+    }
   }
 }
