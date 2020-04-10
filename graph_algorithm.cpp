@@ -63,10 +63,10 @@ bool Query::Check(const Graph &graph) {
   return true;
 
 }
-Query::Query(int n) {
+Query::Query(int n, string input_str) {
   this->choose_.resize(n);
   find_core_k_ = -1;
-  freopen("/Users/gjy/CLionProjects/Community/cmake-build-debug/query.in", "r", stdin);
+  freopen(("../cmake-build-debug/" + input_str).c_str(), "r", stdin);
   int nq;
   query_sum_ = 0;
   read(nq);read(query_maxsize_);
@@ -110,4 +110,51 @@ void Query::Search(const Graph &graph, int x) {
 void Query::Output() {
   cout << "Find_Core_K="<<this->find_core_k_ << endl;
   for (auto x : this->find_core_) cout << x + 1<< " "; cout << endl;
+}
+
+Graph  Query:: ReidGraph(const Graph &graph, vector<int> & id , int st) {
+  queue<int> q;
+  q.push(st);
+  vector<int> vis(graph.n_, 0);
+  int id_now = 0;
+  id[st] = id_now;
+  vis[st] = 1;
+  while (!q.empty()) {
+    int x = q.front();
+    q.pop();
+    for (auto y : graph.edge_[x]) {
+      if (vis[y]) continue;
+      vis[y] = 1;
+      q.push(y);
+      id[y] = ++id_now;
+    }
+  }
+  assert(id_now == graph.n_ - 1);
+  Graph reid_graph(graph.n_);
+  reid_graph.max_attribute_ = graph.max_attribute_;
+  for (int i = 0; i < graph.n_; ++i) {
+    for (auto y : graph.vertex_[i].attribute_)
+      reid_graph.vertex_[id[i]].attribute_.push_back(y);
+    for (auto y : graph.edge_[i]) {
+      reid_graph.edge_[id[i]].push_back(id[y]);
+    }
+  }
+  return reid_graph;
+}
+
+void Query::Start(const Graph &graph) {
+//    query.Search(graph, 0);
+  for (int i = 0; i < graph.n_; ++i) {
+    vector<int> id(graph.n_);
+    Graph reid_graph = this->ReidGraph(graph, id, i);
+    this->id_.resize(graph.n_);
+    for (auto x : id) {
+      this->id_[id[x]] = x;
+    }
+    this->search_core_.push_back(0);
+    this->choose_[0] = 1;
+    this->Search(reid_graph, 1);
+    this->search_core_.pop_back();
+    this->choose_[0] = 0;
+  }
 }

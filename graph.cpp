@@ -140,8 +140,9 @@ void Graph:: InputGraph(){
 
     cout << "Finish "<<__FUNCTION__<<endl;
 }
-void Graph:: InputGraphWithAttribute(){
-    freopen("/Users/gjy/CLionProjects/Community/cmake-build-debug/input.in", "r", stdin);
+void Graph:: InputGraphWithAttribute(string input_str){
+
+    freopen(("../cmake-build-debug/" + input_str).c_str(), "r", stdin);
     read(this->n_); read(this->m_);
     this->Init();
 

@@ -46,7 +46,7 @@ class Graph{
         Graph();
         bool Empty();
         void InputGraph();
-        void InputGraphWithAttribute();
+        void InputGraphWithAttribute(string input_str);
         void OutputGraph();
         void OutputOriginalGraph();
         Graph RenewGraphwithReid();

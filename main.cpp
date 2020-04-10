@@ -145,66 +145,23 @@ void CompareTrussandEgocore(){
         }
     }while(1);
 }
-Graph  ReidGraph(const Graph &graph, vector<int> & id , int st) {
-  queue<int> q;
-  q.push(st);
-  vector<int> vis(graph.n_, 0);
-  int id_now = 0;
-  id[st] = id_now;
-  vis[st] = 1;
-  while (!q.empty()) {
-    int x = q.front();
-    q.pop();
-    for (auto y : graph.edge_[x]) {
-        if (vis[y]) continue;
-        vis[y] = 1;
-        q.push(y);
-        id[y] = ++id_now;
-    }
-  }
-  assert(id_now == graph.n_ - 1);
-  Graph reid_graph(graph.n_);
-  reid_graph.max_attribute_ = graph.max_attribute_;
-  for (int i = 0; i < graph.n_; ++i) {
-      for (auto y : graph.vertex_[i].attribute_)
-        reid_graph.vertex_[id[i]].attribute_.push_back(y);
-      for (auto y : graph.edge_[i]) {
-          reid_graph.edge_[id[i]].push_back(id[y]);
-      }
-  }
-  return reid_graph;
 
+int main(int argc, char *argv[]) {
 
-}
-int main() {
     srand(time(NULL));
 
 
     Graph graph;
-    graph.InputGraphWithAttribute();
+    graph.InputGraphWithAttribute((string)argv[1]);
 
     clock_t start,finish; //定义开始，结束变量
     start = clock();//初始化
-
-    Query query(graph.n_);
-//    query.Search(graph, 0);
-    for (int i = 0; i < graph.n_; ++i) {
-      vector<int> id(graph.n_);
-      Graph reid_graph = ReidGraph(graph, id, i);
-      query.id_.resize(graph.n_);
-      for (auto x : id) {
-          query.id_[id[x]] = x;
-      }
-      query.search_core_.push_back(0);
-      query.choose_[0] = 1;
-      query.Search(reid_graph, 1);
-      query.search_core_.pop_back();
-      query.choose_[0] = 0;
-    }
-
+    Query query(graph.n_, (string)argv[2]);
+    query.Start(graph);
     finish = clock();//初始化结束时间
     double duration = (double)(finish - start) / CLOCKS_PER_SEC;//转换浮点型
     printf( "TestDataset %lf seconds\n", duration );
+
     query.Output();
     return 0;
 }

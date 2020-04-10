@@ -13,11 +13,14 @@ class Query {
   vector<int> choose_;
   vector<int> id_;
   vector<tuple<int, int>> queries;
-  Query(int n);
-  void Search(const Graph &graph, int x);
+  Query(int n, string input_str);
+  void Output();
+  void Start(const Graph &graph);
+ private:
+  Graph ReidGraph(const Graph &graph, vector<int> & id , int st);
   bool Check(const Graph &graph);
   bool FindMatch(BiGraph &bigraph);
-  void Output();
+  void Search(const Graph &graph, int x);
 };
 
 #endif //COMMUNITY_GRAPH_ALGORITHM_H
