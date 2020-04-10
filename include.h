@@ -6,6 +6,7 @@
 #define Communtity_INCLUDE_H
 //#define DEBUG 1
 //#define DEBUG_ASSERT 1
+#include "assert.h"
 #include<vector>
 #include<iostream>
 #include<algorithm>

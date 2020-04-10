@@ -45,7 +45,6 @@ CMakeFiles/Community.dir/ks_core.cpp.o
  /Users/gjy/CLionProjects/Community/ks_core.cpp
  /Users/gjy/CLionProjects/Community/ks_core.h
 CMakeFiles/Community.dir/main.cpp.o
- /Users/gjy/CLionProjects/Community/Graph.h
  /Users/gjy/CLionProjects/Community/clique.h
  /Users/gjy/CLionProjects/Community/condition.h
  /Users/gjy/CLionProjects/Community/core.h
@@ -59,7 +58,7 @@ CMakeFiles/Community.dir/main.cpp.o
  /Users/gjy/CLionProjects/Community/tree.h
  /Users/gjy/CLionProjects/Community/truss.h
 CMakeFiles/Community.dir/tree.cpp.o
- /Users/gjy/CLionProjects/Community/Graph.h
+ /Users/gjy/CLionProjects/Community/graph.h
  /Users/gjy/CLionProjects/Community/include.h
  /Users/gjy/CLionProjects/Community/tree.cpp
  /Users/gjy/CLionProjects/Community/tree.h

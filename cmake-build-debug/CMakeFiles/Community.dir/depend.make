@@ -44,7 +44,6 @@ CMakeFiles/Community.dir/ks_core.cpp.o: ../include.h
 CMakeFiles/Community.dir/ks_core.cpp.o: ../ks_core.cpp
 CMakeFiles/Community.dir/ks_core.cpp.o: ../ks_core.h
 
-CMakeFiles/Community.dir/main.cpp.o: ../Graph.h
 CMakeFiles/Community.dir/main.cpp.o: ../clique.h
 CMakeFiles/Community.dir/main.cpp.o: ../condition.h
 CMakeFiles/Community.dir/main.cpp.o: ../core.h
@@ -58,7 +57,7 @@ CMakeFiles/Community.dir/main.cpp.o: ../main.cpp
 CMakeFiles/Community.dir/main.cpp.o: ../tree.h
 CMakeFiles/Community.dir/main.cpp.o: ../truss.h
 
-CMakeFiles/Community.dir/tree.cpp.o: ../Graph.h
+CMakeFiles/Community.dir/tree.cpp.o: ../graph.h
 CMakeFiles/Community.dir/tree.cpp.o: ../include.h
 CMakeFiles/Community.dir/tree.cpp.o: ../tree.cpp
 CMakeFiles/Community.dir/tree.cpp.o: ../tree.h

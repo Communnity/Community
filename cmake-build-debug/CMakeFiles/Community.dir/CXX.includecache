@@ -6,9 +6,9 @@
 
 #IncludeRegexTransform: 
 
-/Users/gjy/CLionProjects/Community/Graph.h
-include.h
-/Users/gjy/CLionProjects/Community/include.h
+/Users/gjy/CLionProjects/Community/clique.cpp
+clique.h
+/Users/gjy/CLionProjects/Community/clique.h
 
 /Users/gjy/CLionProjects/Community/clique.h
 include.h
@@ -16,9 +16,17 @@ include.h
 graph.h
 /Users/gjy/CLionProjects/Community/graph.h
 
+/Users/gjy/CLionProjects/Community/condition.cpp
+condition.h
+/Users/gjy/CLionProjects/Community/condition.h
+
 /Users/gjy/CLionProjects/Community/condition.h
 include.h
 /Users/gjy/CLionProjects/Community/include.h
+
+/Users/gjy/CLionProjects/Community/core.cpp
+core.h
+/Users/gjy/CLionProjects/Community/core.h
 
 /Users/gjy/CLionProjects/Community/core.h
 include.h
@@ -28,6 +36,10 @@ graph.h
 condition.h
 /Users/gjy/CLionProjects/Community/condition.h
 
+/Users/gjy/CLionProjects/Community/ego_community.cpp
+ego_community.h
+/Users/gjy/CLionProjects/Community/ego_community.h
+
 /Users/gjy/CLionProjects/Community/ego_community.h
 include.h
 /Users/gjy/CLionProjects/Community/include.h
@@ -35,6 +47,10 @@ graph.h
 /Users/gjy/CLionProjects/Community/graph.h
 core.h
 /Users/gjy/CLionProjects/Community/core.h
+
+/Users/gjy/CLionProjects/Community/file_manage.cpp
+file_manage.h
+/Users/gjy/CLionProjects/Community/file_manage.h
 
 /Users/gjy/CLionProjects/Community/file_manage.h
 include.h
@@ -48,11 +64,21 @@ graph.h
 include.h
 /Users/gjy/CLionProjects/Community/include.h
 
+/Users/gjy/CLionProjects/Community/graph_algorithm.cpp
+graph_algorithm.h
+/Users/gjy/CLionProjects/Community/graph_algorithm.h
+
 /Users/gjy/CLionProjects/Community/graph_algorithm.h
 graph.h
 /Users/gjy/CLionProjects/Community/graph.h
 
+/Users/gjy/CLionProjects/Community/include.cpp
+include.h
 /Users/gjy/CLionProjects/Community/include.h
+
+/Users/gjy/CLionProjects/Community/include.h
+assert.h
+/Users/gjy/CLionProjects/Community/assert.h
 vector
 -
 iostream
@@ -88,6 +114,10 @@ dirent.h
 fstream
 -
 
+/Users/gjy/CLionProjects/Community/ks_core.cpp
+ks_core.h
+/Users/gjy/CLionProjects/Community/ks_core.h
+
 /Users/gjy/CLionProjects/Community/ks_core.h
 include.h
 /Users/gjy/CLionProjects/Community/include.h
@@ -116,11 +146,19 @@ tree.h
 graph_algorithm.h
 /Users/gjy/CLionProjects/Community/graph_algorithm.h
 
+/Users/gjy/CLionProjects/Community/tree.cpp
+tree.h
+/Users/gjy/CLionProjects/Community/tree.h
+
 /Users/gjy/CLionProjects/Community/tree.h
 include.h
 /Users/gjy/CLionProjects/Community/include.h
-Graph.h
-/Users/gjy/CLionProjects/Community/Graph.h
+graph.h
+/Users/gjy/CLionProjects/Community/graph.h
+
+/Users/gjy/CLionProjects/Community/truss.cpp
+truss.h
+/Users/gjy/CLionProjects/Community/truss.h
 
 /Users/gjy/CLionProjects/Community/truss.h
 include.h

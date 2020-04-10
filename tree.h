@@ -5,7 +5,7 @@
 #ifndef COMMUNITY_TREE_H
 #define COMMUNITY_TREE_H
 #include "include.h"
-#include "Graph.h"
+#include "graph.h"
 class Tree {
  public:
   int root_, n_, max_attribute_;

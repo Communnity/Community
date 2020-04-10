@@ -102,10 +102,7 @@ void Graph:: RandomInputGraph(){
 }
 void Graph:: InputGraph(){
     //freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/gowalla/gowalla.inf","r",stdin);
-
-
     //freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/foursquare_extend/foursquare_extend.inf","r",stdin);
-
      // freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/youtube/com-youtube.ungraph-reid.txt", "r", stdin);
      //freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/facebook/facebook-combined-reid.txt", "r", stdin);
     freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/small/dblp-graph.in", "r", stdin);

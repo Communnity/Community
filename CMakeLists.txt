@@ -1,9 +1,9 @@
-cmake_minimum_required(VERSION 3.14)
+cmake_minimum_required(VERSION 3.10)
 project(Community)
 
 set(CMAKE_CXX_STANDARD 14)
 
-include_directories(.)
+#include_directories(.)
 
 add_executable(Community
     clique.cpp
