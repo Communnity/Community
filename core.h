@@ -35,7 +35,7 @@ class CoreBucket{
         int start_;
 };
 CoreDelLine  FindCore(Graph &graph);
-Graph FindKCore(Graph graph);
+Graph FindKCore(Graph graph, int k_degree);
 bool CheckCoresDelLine(Graph graph, CoreDelLine cores_del_line);
 Cores FindLeastColorCores(Graph graph, NeedColorList need_color_vertex_list, CoreDelLine cores_del_line);
 Graph BuildCorewithIndex(Graph graph, CoreDelLine core_del_line, int core_k);

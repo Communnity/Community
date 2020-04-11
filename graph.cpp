@@ -66,14 +66,17 @@ void Graph:: DeleteVertex(int u){
 }
 
 void Graph:: Init(){
-    for(int i =0 ; i < this->n_; ++i){
-        Vertex vertex;
-        vertex_.push_back(vertex);
-    }
-    for(int i = 0; i < this->n_; ++i){
-        vector<int> empty_edge;
-        edge_.push_back(empty_edge);
-    }
+
+//    for(int i =0 ; i < this->n_; ++i){
+//        Vertex vertex;
+//        vertex_.push_back(vertex);
+//    }
+  vertex_ = vector<Vertex> (this->n_);
+//    for(int i = 0; i < this->m_; ++i){
+//        vector<int> empty_edge;
+//        edge_.push_back(empty_edge);
+//    }
+  edge_ = vector<vector<int> >(this->n_);
 }
 void Graph:: RandomInputGraph(){
 
@@ -100,6 +103,9 @@ void Graph:: RandomInputGraph(){
         this->edge_[v].push_back(u);
     }
 }
+
+
+
 void Graph:: InputGraph(){
     //freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/gowalla/gowalla.inf","r",stdin);
     //freopen("/Users/gjy/Documents/社交网络与图论论文/dataset/foursquare_extend/foursquare_extend.inf","r",stdin);
@@ -135,7 +141,7 @@ void Graph:: InputGraph(){
     }
 
 
-    cout << "Finish "<<__FUNCTION__<<endl;
+    cerr << "Finish "<<__FUNCTION__<<endl;
 }
 void Graph:: InputGraphWithAttribute(string input_str){
 
@@ -171,7 +177,7 @@ void Graph:: InputGraphWithAttribute(string input_str){
         }
 
     }
-    cout << "Finish "<<__FUNCTION__<<endl;
+    cerr << "Finish "<<__FUNCTION__<<endl;
 }
 void Graph::OutputGraph() {
     for(int u = 0; u < this->n_; u++) if(this->exist_vertex_[u])
@@ -189,15 +195,12 @@ void Graph::OutputGraph() {
     }
 }
 Graph Graph::RenewGraph(){
-    Graph new_graph;
-    new_graph.n_ = this->n_;
-    new_graph.m_ = 0;
-    new_graph.Init();
+    Graph new_graph(this->n_);
+
     for(int u = 0; u < new_graph.n_; u++)
-        new_graph.exist_vertex_[u] = this->exist_vertex_[u];
+        new_graph.exist_vertex_[u] = 1;
     for(int u = 0; u < this->n_; u++) if(this->exist_vertex_[u]){
-            for(auto edge_u:this->edge_[u]){
-                int v = edge_u;
+            for(auto v:this->edge_[u]){
                 if(!this->exist_vertex_[v]) continue;
                 if(!this->exist_edge_[EdgeId(u, v)]) continue;
                 if(new_graph.exist_edge_[EdgeId(u, v)]) continue;
@@ -207,6 +210,12 @@ Graph Graph::RenewGraph(){
                 new_graph.m_++;
             }
         }
+    for(int u = 0; u < new_graph.n_; u++) {
+      for (auto x : this->vertex_[u].attribute_) {
+        new_graph.vertex_[u].attribute_.push_back(x);
+      }
+    }
+    cerr << new_graph.m_ << " "<<this->m_ << endl;
     return new_graph;
 }
 Graph Graph::RenewGraphwithReid(){
@@ -279,6 +288,7 @@ Graph::Graph(void) {
 }
 Graph::Graph(int n){
     this->n_ = n;
+    this->m_ = 0;
 //    for(int i =0 ; i < this->n_; ++i){
 //        Vertex vertex;
 //        vertex_.push_back(vertex);

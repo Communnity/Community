@@ -129,6 +129,10 @@ CoreDelLine FindCore(Graph &graph){
 
 Graph FindKCore(Graph graph, int k_degree){
     CoreDelLine core_del_line = FindCore(graph);
+    if (k_degree == - 1) {
+        k_degree = core_del_line[core_del_line.size() - 1].k_;
+    }
+    cerr << k_degree <<  " " << graph.n_ << " " <<core_del_line[core_del_line.size() - 1].del_vertex_.size() <<  endl;
     for(int i = 0; i < core_del_line.size(); i++){
         if(core_del_line[i].k_ >= k_degree){
             break;
@@ -136,6 +140,7 @@ Graph FindKCore(Graph graph, int k_degree){
         for(int j = 0; j < core_del_line[i].del_vertex_.size(); j++){
             int u = core_del_line[i].del_vertex_[j];
             graph.exist_vertex_[u] = 0;
+
         }
     }
     graph = graph.RenewGraph();

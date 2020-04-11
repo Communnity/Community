@@ -10,9 +10,9 @@ bool Query::FindMatch(BiGraph &bigraph) {
 }
 bool Query::Check(const Graph &graph) {
 
-  int n1 = this->search_core_.size();
-  if (n1 < this->query_sum_) return false;
-  int n2 = 0;
+
+  if ((int)this->search_core_.size() < this->query_sum_) return false;
+
   int search_core_k = 1e9;
   for (auto x : this->search_core_) {
     int cnt = 0;
@@ -26,6 +26,17 @@ bool Query::Check(const Graph &graph) {
   if (search_core_k == find_core_k_ && this->search_core_.size() >= find_core_.size()) return false;
 
 
+  vector<int> attribute_sum(graph.max_attribute_ + 1, 0);
+  for (auto x : this->search_core_) {
+    for (auto attribute : graph.vertex_[x].attribute_) {
+      attribute_sum[attribute]++;
+    }
+  }
+  for (auto query : this->queries) {
+    int attribute, number;
+    tie(attribute, number) = query;
+    if( (attribute_sum[attribute] < number)) return false;
+  }
 
   int leftn = 0;
   for (int i = 0; i < queries.size(); ++i)
@@ -83,12 +94,12 @@ int Query::ExpectedKCore(const Graph &graph, int limit) {
   if (this->search_core_.size() == 0) return -1;
   int expected_core_k  = 1e9;
   for (auto x : this->search_core_) {
-    int cnt = 0;
+    int cnt1 = 0, cnt2 = 0;
     for (auto y : graph.edge_[x]) {
-      if (this->choose_[y]) ++cnt;
-      else if(y > limit) ++cnt;
+      if (this->choose_[y]) ++cnt1;
+      else if(y > limit) ++cnt2;
     }
-    expected_core_k = min(expected_core_k, cnt);
+    expected_core_k = min(expected_core_k, cnt1 + min(cnt2, this->query_maxsize_ - (int)this->search_core_.size()));
   }
   return expected_core_k;
 }
@@ -99,25 +110,25 @@ void Query::Search(const Graph &graph, int x) {
 #endif
 
   if (x == graph.n_) return;
-  if (this->search_core_.size() > this->query_maxsize_) {
-    return;
-  }
-//  cout << "check1" << endl;
+
+
   if (this->ExpectedKCore(graph, x - 1) < this->find_core_k_) {
     return;
   }
-//  cout << "check3" << endl;
   if(this->Check(graph)) {
     return;
   }
-//  cout << "check2" << endl;
 
-  int cnt = 0, connected = 0;
+  if (this->search_core_.size() + 1 > this->query_maxsize_) {
+    return;
+  }
+  int cnt1 = 0, cnt2 = 0, connected = 0;
   for (int i = 0; i < graph.edge_[x].size(); ++i) {
-    if (this->choose_[graph.edge_[x][i]]) cnt++;
-    else if (graph.edge_[x][i] > x) cnt++;
+    if (this->choose_[graph.edge_[x][i]]) cnt1++;
+    else if (graph.edge_[x][i] > x) cnt2++;
     if (this->choose_[graph.edge_[x][i]]) connected = 1;
   }
+  int cnt = cnt1 + min(cnt2, this->query_maxsize_ - (int)this->search_core_.size() - 1);
   if (connected && !(cnt < this->find_core_k_ || (cnt  == this->find_core_k_ && search_core_.size() >= this->find_core_.size()))) {
     this->choose_[x] = 1;
     this->search_core_.push_back(x);
@@ -131,10 +142,10 @@ void Query::Search(const Graph &graph, int x) {
 }
 
 void Query::Output() {
-  cout << "Find_Core_K="<<this->find_core_k_ << endl;
-  for (auto x : this->find_core_) cout << x + 1<< " "; cout << endl;
+  cerr << "Find_Core_K="<<this->find_core_k_ << endl;
+  for (auto x : this->find_core_) cerr << x + 1<< " "; cerr << endl;
 #ifdef Test
-  cout << "Search Core=" << this->cost_ << endl;
+  cerr << "Search Core=" << this->cost_ << endl;
 #endif
 }
 
@@ -174,7 +185,7 @@ Graph  Query:: ReidGraph(const Graph &graph, vector<int> & id , int st) {
 
 void Query::Start(const Graph &graph) {
 
-//    query.Search(graph, 0);
+
   for (int i = 0; i < graph.n_; ++i) {
     vector<int> id(graph.n_, -1);
     Graph reid_graph = this->ReidGraph(graph, id, i);

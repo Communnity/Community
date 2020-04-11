@@ -146,11 +146,52 @@ void CompareTrussandEgocore(){
     }while(1);
 }
 
+void MakeData(char *argv[]) {
+    freopen(argv[1], "w", stdout);
+    int n = 30, m = 100;
+    cout << n << " " << m << endl;
+    vector<vector<bool> >edge(n + 1, vector<bool>(n + 1, 0));
+    for (int i = 1; i <= m; ++i) {
+        int x = rand() % n + 1, y = rand() % n + 1;
+        while (x == y || edge[x][y]) x = rand() % n + 1, y = rand() % n + 1;
+        edge[x][y] = 1;
+        edge[y][x] = 1;
+        cout << x << " " << y << endl;
+    }
+
+    int max_attribute = 5;
+    cout << max_attribute << endl;
+    for (int i = 1; i <= n; ++i) {
+        int k = rand () % max_attribute;
+        cout << k << " ";
+        vector<bool> used(max_attribute + 1, 0);
+        for (int i = 0; i < k; ++i) {
+            int x =  rand() % max_attribute + 1;
+            while(used[x]) x = rand() % max_attribute + 1;
+            used[x] = 1;
+            cout << x << " ";
+        }
+        cout << endl;
+
+    }
+    freopen(argv[2], "w", stdout);
+    int nq = rand() % max_attribute  + 1, ns = min(10, rand() % n + 1);
+    cout << nq << " " << ns << endl;
+    vector<bool> used(max_attribute + 1, 0);
+    for (int i = 1; i <= nq; ++i) {
+        int x = rand() % max_attribute + 1;
+        while(used[x]) x = rand() % max_attribute + 1;
+        used[x] = 1;
+        int number = min(5,rand() % (ns + 1));
+        ns -= number;
+        cout << x << " " << number << endl;
+    }
+}
 int main(int argc, char *argv[]) {
 
     srand(time(NULL));
 
-
+    MakeData(argv);
     Graph graph;
     graph.InputGraphWithAttribute((string)argv[1]);
 
@@ -160,7 +201,7 @@ int main(int argc, char *argv[]) {
     query.Start(graph);
     finish = clock();//初始化结束时间
     double duration = (double)(finish - start) / CLOCKS_PER_SEC;//转换浮点型
-    printf( "TestDataset %lf seconds\n", duration );
+    cerr <<  "TestDataset " << duration << "seconds" << endl;
 
     query.Output();
     return 0;
