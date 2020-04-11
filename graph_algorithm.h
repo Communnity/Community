@@ -10,6 +10,7 @@ class Query {
  public:
   int query_maxsize_, query_sum_, cost_;
   int find_core_k_;
+
   vector<int> search_core_, find_core_;
   vector<int> choose_;
   vector<int> id_;

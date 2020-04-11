@@ -78,7 +78,10 @@ bool Query::Check(const Graph &graph) {
 Query::Query(int n, string input_str) {
   this->choose_.resize(n);
   find_core_k_ = -1;
+
+#ifdef Test
   cost_ = 0;
+#endif
   freopen(("../cmake-build-debug/" + input_str).c_str(), "r", stdin);
   int nq;
   query_sum_ = 0;
@@ -116,7 +119,7 @@ void Query::Search(const Graph &graph, int x) {
     return;
   }
   if(this->Check(graph)) {
-    return;
+    //return; ->want to maxmize core_k, cant'return
   }
 
   if (this->search_core_.size() + 1 > this->query_maxsize_) {
@@ -136,7 +139,6 @@ void Query::Search(const Graph &graph, int x) {
     this->search_core_.pop_back();
     this->choose_[x] = 0;
   }
-
 
   Search(graph, x + 1);
 }
